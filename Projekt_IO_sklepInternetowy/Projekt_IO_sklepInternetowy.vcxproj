@@ -140,9 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Klient.cpp" />
+    <ClCompile Include="Konto.cpp" />
     <ClCompile Include="Źródło.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Klient.h" />
+    <ClInclude Include="Konto.h" />
     <ClInclude Include="Koszyk.h" />
     <ClInclude Include="Magazyn.h" />
     <ClInclude Include="Item.h" />
