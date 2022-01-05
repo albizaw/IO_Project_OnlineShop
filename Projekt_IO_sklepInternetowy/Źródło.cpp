@@ -36,6 +36,25 @@ int ekranStarowy()
 
 }
 
+int menuAdministratora()
+{
+
+	int wybor = 0;
+
+	while (wybor > 3 || wybor < 1)
+	{
+
+		cout << "1. Dodaj produkt" << endl << endl;
+		cout << "2. Usun produkt" << endl << endl;
+		cout << "3. Wyswietl liste produktow" << endl << endl;
+		cout << "4. Wyjscie do ekranu startowego" << endl << endl;
+		cout << "Wybierz opcje 1 - 3: ";
+		cin >> wybor;
+		system("cls");
+		return wybor;
+	}
+}
+
 bool logowanieAdministatora(Konto adminLogowanie) {
 	//to co robi administrator
 		//logowanie
@@ -121,6 +140,37 @@ ekranStartowy:
 			cout << "Wpisales bledne haslo. Przenosze do ekranu startowego" << endl;
 			wait(3);
 			system("cls");
+			goto ekranStartowy;
+		}
+
+		//Jesli logowanie sie powiodlo tutaj dalsza czesc tego co ma robic
+		system("cls");
+	adminMenu:
+
+		cout << "-------------------------------------------------------------" << endl;
+		cout << "	Poprawnie zalogowano do panelu administratora " << endl;
+		cout << "-------------------------------------------------------------" << endl << endl;
+
+		int chooseAdmin = menuAdministratora();
+
+		if (chooseAdmin == 1)
+		{
+			//dodawanie produktu
+			cout << "Dodam produkt" << endl;
+		}
+
+		if (chooseAdmin == 2)
+		{
+			//usuwanie produktu
+		}
+
+		if (chooseAdmin == 3)
+		{
+			//wyswietlenie produktów
+		}
+		
+		if (chooseAdmin == 4)
+		{
 			goto ekranStartowy;
 		}
 	}
