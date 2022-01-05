@@ -3,6 +3,13 @@
 
 using namespace std;
 
+class Klient {
+private:
+
+public:
+
+};
+
 int main()
 {
 
