@@ -13,4 +13,8 @@ public:
 int main()
 {
 
+	cout << "Witaj w naszym sklepie internetowym! " << endl;
+	
+	cout << 
+
 }
