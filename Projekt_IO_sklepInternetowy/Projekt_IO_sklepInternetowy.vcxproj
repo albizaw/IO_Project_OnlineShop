@@ -142,6 +142,7 @@
     <ClCompile Include="Źródło.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Klient.h" />
     <ClInclude Include="Magazyn.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
