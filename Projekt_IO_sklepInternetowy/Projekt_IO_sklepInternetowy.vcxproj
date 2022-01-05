@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="Klient.cpp" />
     <ClCompile Include="Konto.cpp" />
-    <ClCompile Include="Magazyn.cpp" />
     <ClCompile Include="Produkt.cpp" />
     <ClCompile Include="Źródło.cpp" />
   </ItemGroup>
@@ -149,7 +148,6 @@
     <ClInclude Include="Klient.h" />
     <ClInclude Include="Konto.h" />
     <ClInclude Include="Koszyk.h" />
-    <ClInclude Include="Magazyn.h" />
     <ClInclude Include="Nagłówek.h" />
     <ClInclude Include="Produkt.h" />
     <ClInclude Include="Zamowienie.h" />

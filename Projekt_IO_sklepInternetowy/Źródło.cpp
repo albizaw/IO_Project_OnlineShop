@@ -68,12 +68,43 @@ bool logowanieAdministatora(Konto adminLogowanie) {
 	}
 }
 
+bool logowanieSprzedawcy(Konto sprzedawcaLogowanie)
+{
+	string passDealer = sprzedawcaLogowanie.getPassword();
+	string passDealerRight = sprzedawcaLogowanie.getPassword();
+	cout << "Wprowadz haslo sprzedawcy:	";
+	for (int i = 0; i < passDealerRight.length(); i++)
+	{
+		passDealer[i] = _getch();
+		system("cls");
+		cout << "Wprowadz haslo sprzedawcy:	";
+
+		for (int j = 1; j <= i + 1; j++)
+		{
+			cout << "*";
+		}
+
+	}
+
+	if (passDealer == passDealerRight)
+	{
+		system("cls");
+		cout << "zalogowano" << endl;
+		return true;
+	}
+	else
+	{
+		system("cls");
+		return false;
+	}
+}
 
 
 int main()
 {
 ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
+	Konto sprzedawca("Dawid", "Pala", "1234567890");
 	int numerOpcji = ekranStarowy();
 	if (numerOpcji == 1)
 	{
@@ -88,7 +119,7 @@ ekranStartowy:
 		if (licznik == 3)
 		{
 			cout << "Wpisales bledne haslo. Przenosze do ekranu startowego" << endl;
-			wait(2);
+			wait(3);
 			system("cls");
 			goto ekranStartowy;
 		}
@@ -97,6 +128,21 @@ ekranStartowy:
 	if (numerOpcji == 2)
 	{
 		//to co robi sprzedawca
+		bool logowanieSprzedawca = logowanieSprzedawcy(sprzedawca);
+		int licznik = 1;
+		while (logowanieSprzedawca == 0 && licznik != 3)
+		{
+			system("cls");
+			logowanieSprzedawca = logowanieSprzedawcy(sprzedawca);
+			licznik++;
+		}
+		if (licznik == 3)
+		{
+			cout << "Wpisales bledne haslo. Przenosze do ekranu startowego" << endl;
+			wait(3);
+			system("cls");
+			goto ekranStartowy;
+		}
 	}
 
 	if (numerOpcji == 3)
