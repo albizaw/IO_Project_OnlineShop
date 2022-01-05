@@ -7,10 +7,25 @@
     <ClCompile Include="Klient.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Koszyk.h" />
-    <ClInclude Include="Magazyn.h" />
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="Konto.h" />
-    <ClInclude Include="Klient.h" />
+    <ClCompile Include="Źródło.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Konto.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Klient.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Magazyn.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Klient.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Konto.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
