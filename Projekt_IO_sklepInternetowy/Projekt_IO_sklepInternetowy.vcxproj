@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Klient.cpp" />
     <ClCompile Include="Konto.cpp" />
     <ClCompile Include="Magazyn.cpp" />
@@ -148,9 +149,9 @@
   <ItemGroup>
     <ClInclude Include="Klient.h" />
     <ClInclude Include="Konto.h" />
+    <ClInclude Include="Koszyk.h" />
     <ClInclude Include="Magazyn.h" />
-    <ClInclude Include="Produkt.h" />
-    <ClInclude Include="Zamowienie.h" />
+    <ClInclude Include="Item.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
