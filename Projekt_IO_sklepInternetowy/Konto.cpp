@@ -3,9 +3,14 @@
 
 using namespace std;
 
-Konto::Konto(string imieKlienta, string nazwiskoKlienta, Klient id)
+string Konto::getPassword()
+{
+	return Konto::haslo;
+}
+
+Konto::Konto(string imieKlienta, string nazwiskoKlienta, string haslo)
 {
 	Konto::imie = imieKlienta;
 	Konto::nazwisko = nazwiskoKlienta;
-	Konto::idKlienta = id;
+	Konto::haslo = haslo;
 }

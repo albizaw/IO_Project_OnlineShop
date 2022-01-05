@@ -1,10 +1,13 @@
 #pragma once
 #include "Konto.h"
+#include <string>
+
+using namespace std;
 
 class Klient {
 private:
 	//Koszyk koszykKlienta;
-	Konto* kontoKlienta;
+	//Konto kontoKlienta;
 public:
-	void utworzKonto(string imieKlienta, string nazwiskoKlienta, Klient id);
+	void utworzKonto(string imieKlienta, string nazwiskoKlienta, string haslo);
 };

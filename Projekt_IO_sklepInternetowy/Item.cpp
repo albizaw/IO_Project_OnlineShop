@@ -12,3 +12,4 @@ public:
 private:
 	int iloscSztuk;
 };
+

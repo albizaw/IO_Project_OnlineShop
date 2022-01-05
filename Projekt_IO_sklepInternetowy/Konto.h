@@ -8,7 +8,8 @@ class Konto {
 private:
 	string imie;
 	string nazwisko;
-	Klient idKlienta;
+	string haslo;
 public:
-	Konto(string imieKlienta, string nazwiskoKlienta, Klient id);
+	string getPassword();
+	Konto(string imieKlienta, string nazwiskoKlienta, string haslo);
 };

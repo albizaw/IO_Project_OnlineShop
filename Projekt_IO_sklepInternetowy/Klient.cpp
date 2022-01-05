@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void Klient::utworzKonto(string imieKlienta, string nazwiskoKlienta, Klient id)
+void Klient::utworzKonto(string imieKlienta, string nazwiskoKlienta, string haslo)
 {
-	Klient::kontoKlienta = new Konto(imieKlienta, nazwiskoKlienta, id);
+	//Klient::kontoKlienta = { imieKlienta, nazwiskoKlienta, haslo };
 }

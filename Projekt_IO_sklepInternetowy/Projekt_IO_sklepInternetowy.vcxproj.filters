@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Źródło.cpp" />
     <ClCompile Include="Konto.cpp" />
     <ClCompile Include="Klient.cpp" />
+    <ClCompile Include="Magazyn.cpp" />
+    <ClCompile Include="Produkt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Źródło.cpp">
@@ -16,28 +17,14 @@
     <ClCompile Include="Klient.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Magazyn.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Produkt.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Magazyn.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Klient.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Konto.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Produkt.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Zamowienie.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
+    <ClInclude Include="Klient.h" />
+    <ClInclude Include="Konto.h" />
+    <ClInclude Include="Koszyk.h" />
+    <ClInclude Include="Nagłówek.h" />
+    <ClInclude Include="Magazyn.h" />
+    <ClInclude Include="Produkt.h" />
+    <ClInclude Include="Zamowienie.h" />
   </ItemGroup>
 </Project>

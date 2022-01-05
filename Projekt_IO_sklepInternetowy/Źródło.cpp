@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <Windows.h>
 #include <ctime>
+#include "Konto.h"
 
 void wait(int seconds)
 {
@@ -35,12 +36,13 @@ int ekranStarowy()
 
 }
 
-bool logowanieAdministatora() {
+bool logowanieAdministatora(Konto adminLogowanie) {
 	//to co robi administrator
 		//logowanie
-	char passAdmin[5];
+	string passAdmin = adminLogowanie.getPassword();
+	string passAdminRight = adminLogowanie.getPassword();
 	cout << "Wprowadz haslo administratora:	";
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < passAdminRight.length(); i++)
 	{
 		passAdmin[i] = _getch();
 		system("cls");
@@ -53,9 +55,10 @@ bool logowanieAdministatora() {
 
 	}
 
-	if (strcmp(passAdmin, "admin") == 0)
+	if (passAdmin == passAdminRight)
 	{
 		system("cls");
+		cout << "zalogowano" << endl;
 		return true;
 	}
 	else
@@ -70,16 +73,16 @@ bool logowanieAdministatora() {
 int main()
 {
 ekranStartowy:
-
+	Konto administrator("Adam", "Minowski", "Silnehaslo123");
 	int numerOpcji = ekranStarowy();
 	if (numerOpcji == 1)
 	{
-		bool logowanieAdmin = logowanieAdministatora();
+		bool logowanieAdmin = logowanieAdministatora(administrator);
 		int licznik = 1;
 		while (logowanieAdmin == 0 && licznik != 3)
 		{
 			system("cls");
-			logowanieAdmin = logowanieAdministatora();
+			logowanieAdmin = logowanieAdministatora(administrator);
 			licznik++;
 		}
 		if (licznik == 3)
