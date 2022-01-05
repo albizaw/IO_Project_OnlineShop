@@ -1,13 +1,13 @@
 #include "Item.h"
 
-class MyClass
+class Item
 {
 public:
-	MyClass(int ilosc = 0) 
+	Item(int ilosc = 0) 
 	{
 		iloscSztuk = ilosc;
 	};
-	~MyClass();
+	~Item();
 
 private:
 	int iloscSztuk;
