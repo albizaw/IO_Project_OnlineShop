@@ -55,6 +55,24 @@ int menuAdministratora()
 	}
 }
 
+int menuSprzedawcy()
+{
+	int wybor = 0;
+
+	while (wybor > 3 || wybor < 1)
+	{
+
+		cout << "1. Wyœwietl zamówienia" << endl << endl;
+		cout << "2. Realizuj zamówienie" << endl << endl;
+		cout << "3. Anuluj zamowienie" << endl << endl;
+		cout << "4. Wyjscie do ekranu startowego" << endl << endl;
+		cout << "Wybierz opcje 1 - 3: ";
+		cin >> wybor;
+		system("cls");
+		return wybor;
+	}
+}
+
 bool logowanieAdministatora(Konto adminLogowanie) {
 	//to co robi administrator
 		//logowanie
@@ -125,6 +143,7 @@ ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
 	Konto sprzedawca("Dawid", "Pala", "1234567890");
 	int numerOpcji = ekranStarowy();
+	//administrator menu
 	if (numerOpcji == 1)
 	{
 		bool logowanieAdmin = logowanieAdministatora(administrator);
@@ -175,9 +194,10 @@ ekranStartowy:
 		}
 	}
 
+	//menu sprzedawcy
 	if (numerOpcji == 2)
 	{
-		//to co robi sprzedawca
+		
 		bool logowanieSprzedawca = logowanieSprzedawcy(sprzedawca);
 		int licznik = 1;
 		while (logowanieSprzedawca == 0 && licznik != 3)
@@ -193,10 +213,44 @@ ekranStartowy:
 			system("cls");
 			goto ekranStartowy;
 		}
+
+		system("cls");
+	sprzedawcaMenu:
+
+		cout << "-------------------------------------------------------------" << endl;
+		cout << "	Poprawnie zalogowano do panelu sprzedawcy " << endl;
+		cout << "-------------------------------------------------------------" << endl << endl;
+
+		int chooseDealer = menuSprzedawcy();
+
+		if (chooseDealer == 1)
+		{
+			//wyswietlanie zamowien
+			cout << "Dodam produkt" << endl;
+		}
+
+		if (chooseDealer == 2)
+		{
+			//realizacja zamowien
+		}
+
+		if (chooseDealer == 3)	
+		{
+			//anulowanie zamowien
+		}
+
+		if (chooseDealer == 4)
+		{
+			goto ekranStartowy;
+		}
+
+
 	}
 
 	if (numerOpcji == 3)
 	{
 		// to co robi klient
 	}
+
+	system("pasuse");
 }
