@@ -5,6 +5,8 @@
     <ClCompile Include="Konto.cpp" />
     <ClCompile Include="Klient.cpp" />
     <ClCompile Include="Produkt.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Magazyn.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Źródło.cpp">
@@ -24,5 +26,7 @@
     <ClInclude Include="Nagłówek.h" />
     <ClInclude Include="Produkt.h" />
     <ClInclude Include="Zamowienie.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Magazyn.h" />
   </ItemGroup>
 </Project>
