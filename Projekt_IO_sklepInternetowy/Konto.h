@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Klient.h"
+#include "Koszyk.h"
 
 using namespace std;
 
@@ -9,7 +9,9 @@ private:
 	string imie;
 	string nazwisko;
 	string haslo;
+	Koszyk* koszykKlienta;
 public:
 	string getPassword();
+	Konto();
 	Konto(string imieKlienta, string nazwiskoKlienta, string haslo);
 };

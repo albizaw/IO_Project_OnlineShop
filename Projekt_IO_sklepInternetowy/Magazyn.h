@@ -5,12 +5,10 @@ using namespace std;
 class Magazyn : public Produkt
 {
 private:
-	Produkt *produktyMagazyn;
-	unsigned int rozmiarMagazynu;
+	Produkt *produktyMagazyn[100];
 public:
-	Magazyn(int);
+	Magazyn();
 	void dodajProdukt(Produkt nowyProdukt);
 	void usunProdukt(Produkt produktDoUsuniecia);
 	void wyswietlListeProduktow();
-	unsigned int zwrocRozmiarMagazynu();
 };

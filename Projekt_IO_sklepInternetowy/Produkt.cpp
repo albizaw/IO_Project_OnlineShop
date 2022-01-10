@@ -31,3 +31,8 @@ void Produkt::zmienCene(float nowaCena)
 {
 	cena = nowaCena;
 }
+
+string Produkt::zwrocNazwe()
+{
+	return nazwa;
+}

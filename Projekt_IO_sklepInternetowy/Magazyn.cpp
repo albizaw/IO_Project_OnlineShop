@@ -4,10 +4,17 @@ using namespace std;
 
 Magazyn::Magazyn()
 {
-
+	*produktyMagazyn = { NULL };
 }
 
-unsigned int Magazyn::zwrocRozmiarMagazynu()
+void Magazyn::dodajProdukt(Produkt nowyProdukt)
 {
-	return rozmiarMagazynu;
+}
+
+void Magazyn::usunProdukt(Produkt produktDoUsuniecia)
+{
+}
+
+void Magazyn::wyswietlListeProduktow()
+{
 }

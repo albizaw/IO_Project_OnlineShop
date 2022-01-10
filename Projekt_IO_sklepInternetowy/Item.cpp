@@ -1,15 +1,19 @@
 #include "Item.h"
 
-class Item
+Item::Item(Produkt dodawanyProdukt, int ilosc)
 {
-public:
-	Item(int ilosc = 0) 
-	{
-		iloscSztuk = ilosc;
-	};
-	~Item();
+	iloscSztuk = ilosc;
+	dodanyProdukt = dodawanyProdukt;
+}
 
-private:
-	int iloscSztuk;
-};
+int Item::zwrocIloscSztuk()
+{
+	return iloscSztuk;
+}
+
+string Item::zwrocNazweProduktu()
+{
+	return dodanyProdukt.zwrocNazwe();
+}
+
 

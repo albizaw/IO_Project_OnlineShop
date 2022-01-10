@@ -139,6 +139,13 @@ bool logowanieSprzedawcy(Konto sprzedawcaLogowanie)
 
 int main()
 {
+	/*
+	for
+	pobieramy z pliku
+	tworzymy produkt
+	dodajemy produkt
+	/for
+	*/
 ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
 	Konto sprzedawca("Dawid", "Pala", "1234567890");
@@ -249,8 +256,7 @@ ekranStartowy:
 
 	if (numerOpcji == 3)
 	{
-		// to co robi klient
 	}
 
-	system("pasuse");
+	system("pause");
 }

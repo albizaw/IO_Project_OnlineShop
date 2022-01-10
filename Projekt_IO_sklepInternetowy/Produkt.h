@@ -15,4 +15,5 @@ public:
 	Produkt(string nazwaProduktu, float cenaProduktu, unsigned int iloscProduktu);
 	void zmienIlosc(unsigned int nowaIlosc);
 	void zmienCene(float nowaCena);
+	string zwrocNazwe();
 };
