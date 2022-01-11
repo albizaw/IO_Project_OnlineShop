@@ -21,6 +21,7 @@ void Magazyn::wyswietlListeProduktow()
 {
 	for (int i = 0; i < iterator; i++)
 	{
+		cout << i + 1 << ".";
 		produktyMagazyn[i]->wyswietlProdukt();
 	}
 }

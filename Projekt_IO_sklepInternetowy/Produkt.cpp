@@ -42,7 +42,7 @@ void Produkt::ustawProdukt(string _nazwa, float _cena, unsigned int _ilosc)
 
 void Produkt::wyswietlProdukt()
 {
-	cout << nazwa << " " << cena << " " << ilosc << endl;
+	cout << "Nazwa:" << nazwa << " " << "Cena:" << cena << " " << "Ilosc:" << ilosc << endl << endl;;
 }
 
 string Produkt::zwrocNazwe()

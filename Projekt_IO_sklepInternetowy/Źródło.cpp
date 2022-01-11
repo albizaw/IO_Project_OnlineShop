@@ -22,6 +22,7 @@ using namespace std;
 
 int ekranStarowy()
 {
+	system("cls");
 	cout << "----------------------------------------------------" << endl;
 	cout << "	Witaj w naszym sklepie internetowym! " << endl;
 	cout << "----------------------------------------------------" << endl << endl;
@@ -82,20 +83,22 @@ int menuSprzedawcy()
 bool logowanieAdministatora(Konto adminLogowanie) {
 	//to co robi administrator
 		//logowanie
+	
 	string passAdmin = adminLogowanie.getPassword();
 	string passAdminRight = adminLogowanie.getPassword();
 	cout << "Wprowadz haslo administratora:	";
 	for (int i = 0; i < passAdminRight.length(); i++)
 	{
 		passAdmin[i] = _getch();
+		
 		system("cls");
 		cout << "Wprowadz haslo administratora:	";
 
 		for (int j = 1; j <= i + 1; j++)
 		{
 			cout << "*";
-		}
 
+		}
 	}
 
 	if (passAdmin == passAdminRight)
@@ -158,20 +161,20 @@ int main()
 	float cena;
 	unsigned int ilosc;
 	Produkt tablicaProduktow[100];
-	
-	ifstream odczyt("baza_produktow.txt");
 	int i = 0;
+	ifstream odczyt("baza_produktow.txt");
+	//int i = 0;
 	while (!odczyt.eof())
 	{
 		odczyt >> nazwa >> cena >> ilosc;
 
 		tablicaProduktow[i].ustawProdukt(nazwa, cena, ilosc);
-		tablicaProduktow[i].wyswietlProdukt();
+		//tablicaProduktow[i].wyswietlProdukt();
 		magazyn.dodajProdukt(&tablicaProduktow[i]);
 		
 		i++;
 	}
-	magazyn.wyswietlListeProduktow();
+	//magazyn.wyswietlListeProduktow();
 	odczyt.close();
 	
 
@@ -201,6 +204,7 @@ ekranStartowy:
 		//Jesli logowanie sie powiodlo tutaj dalsza czesc tego co ma robic
 		system("cls");
 	adminMenu:
+		system("cls");
 
 		cout << "-------------------------------------------------------------" << endl;
 		cout << "	Poprawnie zalogowano do panelu administratora " << endl;
@@ -210,8 +214,45 @@ ekranStartowy:
 
 		if (chooseAdmin == 1)
 		{
-			//dodawanie produktu
-			cout << "Dodam produkt" << endl;
+			string
+
+			//dodawanie produktu do bazy_produktow.txt i do tablicy
+			system("cls");
+			cout << "-------------------------------------------------------------" << endl;
+			cout << "	Dodawanie nowego produktu " << endl;
+			cout << "-------------------------------------------------------------" << endl << endl;
+
+			string nazwa;
+			float cena;
+			unsigned int ilosc;
+
+			cout << "Nazwa produktu: ";
+			cin >> nazwa;
+			cout << "Cena: ";
+			cin >> cena;
+			cout << "Ilosc: ";
+			cin >> ilosc;
+
+			ofstream zapis("baza_produktow.txt", ios_base::app);
+			zapis << nazwa << '\n';
+			zapis << cena << '\n';
+			zapis << ilosc << '\n';
+
+			tablicaProduktow[i].ustawProdukt(nazwa, cena, ilosc);
+			cout << "-------------------------------------------------------------" << endl << endl;
+			cout << "Dodany produkt:" << endl;
+			tablicaProduktow[i].wyswietlProdukt();
+			magazyn.dodajProdukt(&tablicaProduktow[i]);
+			i++;
+			zapis.close();
+			wait(3);
+			
+			
+			goto adminMenu;
+
+
+			
+			//cout << "Dodam produkt" << endl;
 		}
 
 		if (chooseAdmin == 2)
@@ -222,6 +263,26 @@ ekranStartowy:
 		if (chooseAdmin == 3)
 		{
 			//wyswietlenie produktów
+			system("cls");
+			cout << "-------------------------------------------------------------" << endl;
+			cout << "	Wyswietlenie produktow z magazynu " << endl;
+			cout << "-------------------------------------------------------------" << endl << endl;
+
+			magazyn.wyswietlListeProduktow();
+
+			int wybor;
+			cout << "1. Powrot do panelu administratora." << endl;
+			cout << "2. Powrot do menu glownego." << endl;
+			cin >> wybor;
+
+			if (wybor == 1)
+			{
+				goto adminMenu;
+			}
+			else if (wybor == 2)
+			{
+				goto ekranStartowy;
+			}
 		}
 		
 		if (chooseAdmin == 4)
