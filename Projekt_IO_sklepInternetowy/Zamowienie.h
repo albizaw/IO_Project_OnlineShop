@@ -8,6 +8,7 @@ private:
 	int idZamowienia;
 	bool oplacenieZamowienia;
 public:
+	Zamowienie();
 	Zamowienie(int id);
 	void anulujZamowienie();
 	void akceptujZamowienie(bool platnosc);

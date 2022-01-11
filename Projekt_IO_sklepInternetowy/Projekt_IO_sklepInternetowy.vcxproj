@@ -155,6 +155,9 @@
     <ClInclude Include="Produkt.h" />
     <ClInclude Include="Zamowienie.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="x64\baza_produktow.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

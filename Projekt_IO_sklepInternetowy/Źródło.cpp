@@ -4,6 +4,12 @@
 #include <Windows.h>
 #include <ctime>
 #include "Konto.h"
+#include "Item.h"
+#include "Koszyk.h"
+#include "Magazyn.h"
+#include "Produkt.h"
+#include "Zamowienie.h"
+#include <fstream>
 
 void wait(int seconds)
 {
@@ -146,6 +152,29 @@ int main()
 	dodajemy produkt
 	/for
 	*/
+
+	Magazyn magazyn;
+	string nazwa;
+	float cena;
+	unsigned int ilosc;
+	Produkt tablicaProduktow[100];
+	
+	ifstream odczyt("baza_produktow.txt");
+	int i = 0;
+	while (!odczyt.eof())
+	{
+		odczyt >> nazwa >> cena >> ilosc;
+
+		tablicaProduktow[i].ustawProdukt(nazwa, cena, ilosc);
+		tablicaProduktow[i].wyswietlProdukt();
+		magazyn.dodajProdukt(&tablicaProduktow[i]);
+		
+		i++;
+	}
+	magazyn.wyswietlListeProduktow();
+	odczyt.close();
+	
+
 ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
 	Konto sprzedawca("Dawid", "Pala", "1234567890");

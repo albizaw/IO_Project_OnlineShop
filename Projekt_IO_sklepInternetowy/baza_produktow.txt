@@ -1,0 +1,9 @@
+Komputer
+3000
+4
+Okulary
+10
+100
+Pilka
+70
+7

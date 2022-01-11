@@ -32,6 +32,19 @@ void Produkt::zmienCene(float nowaCena)
 	cena = nowaCena;
 }
 
+void Produkt::ustawProdukt(string _nazwa, float _cena, unsigned int _ilosc)
+{
+	nazwa = _nazwa;
+	cena = _cena;
+	ilosc = _ilosc;
+	dostepnosc = true;
+}
+
+void Produkt::wyswietlProdukt()
+{
+	cout << nazwa << " " << cena << " " << ilosc << endl;
+}
+
 string Produkt::zwrocNazwe()
 {
 	return nazwa;

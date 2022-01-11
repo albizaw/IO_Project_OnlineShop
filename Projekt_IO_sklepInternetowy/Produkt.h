@@ -1,5 +1,7 @@
 #pragma once
+#include <iostream>
 #include <string>
+
 
 using namespace std; 
 
@@ -15,5 +17,7 @@ public:
 	Produkt(string nazwaProduktu, float cenaProduktu, unsigned int iloscProduktu);
 	void zmienIlosc(unsigned int nowaIlosc);
 	void zmienCene(float nowaCena);
+	void ustawProdukt(string nazwa, float cena, unsigned int ilosc);
+	void wyswietlProdukt();
 	string zwrocNazwe();
 };

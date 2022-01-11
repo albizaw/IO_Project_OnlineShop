@@ -1,5 +1,9 @@
 #include "Zamowienie.h"
 
+Zamowienie::Zamowienie()
+{
+}
+
 Zamowienie::Zamowienie(int id)
 {
 	idZamowienia = id;
