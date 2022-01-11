@@ -10,6 +10,6 @@ private:
 public:
 	Magazyn();
 	void dodajProdukt(Produkt *nowyProdukt);
-	void usunProdukt(Produkt produktDoUsuniecia);
+	void usunProdukt(int pozycja);
 	void wyswietlListeProduktow();
 };

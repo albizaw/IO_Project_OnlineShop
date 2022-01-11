@@ -55,7 +55,7 @@ int menuAdministratora()
 		cout << "2. Usun produkt" << endl << endl;
 		cout << "3. Wyswietl liste produktow" << endl << endl;
 		cout << "4. Wyjscie do ekranu startowego" << endl << endl;
-		cout << "Wybierz opcje 1 - 3: ";
+		cout << "Wybierz opcje 1 - 4: ";
 		cin >> wybor;
 		system("cls");
 		return wybor;
@@ -258,6 +258,28 @@ ekranStartowy:
 		if (chooseAdmin == 2)
 		{
 			//usuwanie produktu
+			//usuwanie - usuwamy z tablicy rekord o danym id a nastepnie wyswietlamy ponownie liste
+			system("cls");
+
+			cout << "-------------------------------------------------------------" << endl;
+			cout << "	Usuwanie produktow z magazynu " << endl;
+			cout << "-------------------------------------------------------------" << endl << endl;
+
+			magazyn.wyswietlListeProduktow();
+
+			int wybor;
+			cout << "x. Anuluj." << endl;
+			cin >> wybor;
+			if (wybor == 'x')
+			{
+				goto adminMenu;
+			}
+			magazyn.usunProdukt(wybor);
+
+
+			goto adminMenu;
+
+
 		}
 
 		if (chooseAdmin == 3)
