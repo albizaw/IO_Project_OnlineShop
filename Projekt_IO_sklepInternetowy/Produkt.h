@@ -20,6 +20,4 @@ public:
 	void ustawProdukt(string nazwa, float cena, unsigned int ilosc);
 	void wyswietlProdukt();
 	string zwrocNazwe();
-	float zwrocCene();
-	unsigned int zwrocIlosc();
 };

@@ -49,13 +49,3 @@ string Produkt::zwrocNazwe()
 {
 	return nazwa;
 }
-
-float Produkt::zwrocCene()
-{
-	return cena;
-}
-
-unsigned int Produkt::zwrocIlosc()
-{
-	return ilosc;
-}
