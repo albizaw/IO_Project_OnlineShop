@@ -139,7 +139,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Konto.cpp" />
+    <ClCompile Include="koszyk.cpp" />
+    <ClCompile Include="Magazyn.cpp" />
+    <ClCompile Include="Produkt.cpp" />
+    <ClCompile Include="Zamowienie.cpp" />
     <ClCompile Include="Źródło.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Konto.h" />
+    <ClInclude Include="Koszyk.h" />
+    <ClInclude Include="Magazyn.h" />
+    <ClInclude Include="Produkt.h" />
+    <ClInclude Include="Zamowienie.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="x64\baza_produktow.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

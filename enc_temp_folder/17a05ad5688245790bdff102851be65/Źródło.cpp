@@ -275,7 +275,7 @@ ekranStartowy:
 				goto adminMenu;
 			}
 			magazyn.usunProdukt(wybor);
-			//
+
 
 			goto adminMenu;
 
