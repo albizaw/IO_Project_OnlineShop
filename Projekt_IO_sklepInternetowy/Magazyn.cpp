@@ -16,6 +16,7 @@ void Magazyn::dodajProdukt(Produkt *nowyProdukt)
 void Magazyn::usunProdukt(int pozycja)
 {
 	produktyMagazyn[pozycja-1] = NULL;
+	//iterator--;
 }
 
 void Magazyn::wyswietlListeProduktow()

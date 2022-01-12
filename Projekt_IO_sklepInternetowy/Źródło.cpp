@@ -276,10 +276,10 @@ ekranStartowy:
 			}
 			magazyn.usunProdukt(wybor);
 
-
+			//TUTAJ DO PLIKU ZAPIS
+			//goto adminMenu;
+			
 			goto adminMenu;
-
-
 		}
 
 		if (chooseAdmin == 3)

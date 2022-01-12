@@ -27,5 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="x64\baza_produktow.txt" />
+    <Text Include="baza_produktow.txt" />
   </ItemGroup>
 </Project>
