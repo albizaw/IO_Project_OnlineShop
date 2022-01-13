@@ -290,6 +290,9 @@ ekranStartowy:
 				}
 			}
 
+			tablicaProduktow[wybor - 2].wyswietlProdukt();
+				wait(3);
+
 			 tablicaProduktow[wybor - 1].wyswietlProdukt();
 			 wait(6);
 			 tablicaProduktow[wybor].wyswietlProdukt();
@@ -304,14 +307,7 @@ ekranStartowy:
 			ofstream zapis("baza_produktow.txt");
 			for (int i = 0; i < 100; i++)
 			{
-				/*
-				if (tablicaProduktow[i].zwrocNazwe()!="")
-				{
-					zapis << tablicaProduktow[i].zwrocNazwe() << endl;
-					zapis << tablicaProduktow[i].zwrocCene() << endl;
-					zapis << tablicaProduktow[i].zwrocIlosc();
-				}
-				*/
+				
 
 				if (tablicaProduktow[i].zwrocNazwe() != "")
 				{
@@ -330,6 +326,9 @@ ekranStartowy:
 				}
 			}
 			zapis.close();
+			//magazyn.wyswietlListeProduktow();
+			odczyt.close();
+
 			system("pause");
 			goto adminMenu;
 
