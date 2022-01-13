@@ -16,14 +16,24 @@ void Magazyn::dodajProdukt(Produkt *nowyProdukt)
 void Magazyn::usunProdukt(int pozycja)
 {
 	produktyMagazyn[pozycja-1] = NULL;
+	
 }
 
 void Magazyn::wyswietlListeProduktow()
 {
+	int licznik = 1;
 	for (int i = 0; i < iterator; i++)
 	{
-		if (produktyMagazyn[i] == NULL) continue;
-		cout << i + 1 << ".";
-		produktyMagazyn[i]->wyswietlProdukt();
+		if (produktyMagazyn[i] == NULL)
+		{
+			continue;
+		}
+		else
+		{
+			cout << licznik << ".";
+			produktyMagazyn[i]->wyswietlProdukt();
+			licznik++;
+		}
+		
 	}
 }

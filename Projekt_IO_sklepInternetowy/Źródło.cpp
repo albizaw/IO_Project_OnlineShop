@@ -160,6 +160,7 @@ int main()
 	string nazwa;
 	float cena;
 	unsigned int ilosc;
+	poczatek:
 	Produkt tablicaProduktow[100];
 	int i = 0;
 	ifstream odczyt("baza_produktow.txt");
@@ -234,7 +235,7 @@ ekranStartowy:
 			cin >> ilosc;
 
 			ofstream zapis("baza_produktow.txt", ios_base::app);
-			zapis << nazwa << endl;
+			zapis << endl << nazwa << endl;
 			zapis << cena << endl;
 			zapis << ilosc;
 
@@ -275,8 +276,61 @@ ekranStartowy:
 				goto adminMenu;
 			}
 			magazyn.usunProdukt(wybor);
-			//
+			//testuje nadpisywanie pliku itd
+			//usuwanie elementu tablicy
+			for (int q = 0; q < 100; q++)
+			{
+				if (wybor-1==q)
+				{
+					for (int j = q; j < 100-1; j++)
+					{
+						tablicaProduktow[j] = tablicaProduktow[j + 1];
+					}
+					break;
+				}
+			}
 
+			 tablicaProduktow[wybor - 1].wyswietlProdukt();
+			 wait(6);
+			 tablicaProduktow[wybor].wyswietlProdukt();
+			 
+
+			//czyszczenie pliku txt
+			std::ofstream ofs;
+			ofs.open("baza_produktow.txt", std::ofstream::out | std::ofstream::trunc);
+			ofs.close();
+			//wpisanie nowej tablicy do pliku
+			//
+			ofstream zapis("baza_produktow.txt");
+			for (int i = 0; i < 100; i++)
+			{
+				/*
+				if (tablicaProduktow[i].zwrocNazwe()!="")
+				{
+					zapis << tablicaProduktow[i].zwrocNazwe() << endl;
+					zapis << tablicaProduktow[i].zwrocCene() << endl;
+					zapis << tablicaProduktow[i].zwrocIlosc();
+				}
+				*/
+
+				if (tablicaProduktow[i].zwrocNazwe() != "")
+				{
+					if (i == 0)
+					{
+						zapis << tablicaProduktow[i].zwrocNazwe() << endl;
+						zapis << tablicaProduktow[i].zwrocCene() << endl;
+						zapis << tablicaProduktow[i].zwrocIlosc();
+					}
+					else
+					{
+						zapis << endl << tablicaProduktow[i].zwrocNazwe() << endl;
+						zapis << tablicaProduktow[i].zwrocCene() << endl;
+						zapis << tablicaProduktow[i].zwrocIlosc();
+					}
+				}
+			}
+			zapis.close();
+			system("pause");
 			goto adminMenu;
 
 
