@@ -99,8 +99,10 @@ bool logowanieAdministatora(Konto adminLogowanie) {
 			cout << "*";
 
 		}
+		
 	}
-
+	
+	
 	if (passAdmin == passAdminRight)
 	{
 		system("cls");
@@ -148,42 +150,27 @@ bool logowanieSprzedawcy(Konto sprzedawcaLogowanie)
 
 int main()
 {
-	/*
-	for
-	pobieramy z pliku
-	tworzymy produkt
-	dodajemy produkt
-	/for
-	*/
-
+	//uwtorzenie obiektu magazyn do którego zostn¹ wpisane produkty umieszczone w pliku tekstowym baza_produktow.txt
 	Magazyn magazyn;
 	string nazwa;
 	float cena;
 	unsigned int ilosc;
-	poczatek:
 	Produkt tablicaProduktow[100];
 	int i = 0;
 	ifstream odczyt("baza_produktow.txt");
-	//int i = 0;
 	while (!odczyt.eof())
 	{
 		odczyt >> nazwa >> cena >> ilosc;
-
 		tablicaProduktow[i].ustawProdukt(nazwa, cena, ilosc);
-		//tablicaProduktow[i].wyswietlProdukt();
 		magazyn.dodajProdukt(&tablicaProduktow[i]);
-		
 		i++;
 	}
-	//magazyn.wyswietlListeProduktow();
 	odczyt.close();
 	
-
 ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
 	Konto sprzedawca("Dawid", "Pala", "1234567890");
 	int numerOpcji = ekranStarowy();
-	//administrator menu
 	if (numerOpcji == 1)
 	{
 		bool logowanieAdmin = logowanieAdministatora(administrator);
@@ -202,22 +189,18 @@ ekranStartowy:
 			goto ekranStartowy;
 		}
 
-		//Jesli logowanie sie powiodlo tutaj dalsza czesc tego co ma robic
+		//Poprawne zalogowanie do panelu administratora
 		system("cls");
 	adminMenu:
 		system("cls");
-
 		cout << "-------------------------------------------------------------" << endl;
 		cout << "	Poprawnie zalogowano do panelu administratora " << endl;
 		cout << "-------------------------------------------------------------" << endl << endl;
 
 		int chooseAdmin = menuAdministratora();
-
+		//Dodawanie produktu przez administratora do magazynu. Dopisany zostanie on automatycznie
 		if (chooseAdmin == 1)
 		{
-			string
-
-			//dodawanie produktu do bazy_produktow.txt i do tablicy
 			system("cls");
 			cout << "-------------------------------------------------------------" << endl;
 			cout << "	Dodawanie nowego produktu " << endl;
@@ -240,34 +223,27 @@ ekranStartowy:
 			zapis << ilosc;
 
 			tablicaProduktow[i].ustawProdukt(nazwa, cena, ilosc);
-			cout << "-------------------------------------------------------------" << endl << endl;
+			cout <<  endl <<"-------------------------------------------------------------" << endl << endl;
 			cout << "Dodany produkt:" << endl;
 			tablicaProduktow[i].wyswietlProdukt();
 			magazyn.dodajProdukt(&tablicaProduktow[i]);
 			i++;
 			zapis.close();
-			wait(3);
-			
-			
+			wait(5);
 			goto adminMenu;
 
-
-			
-			//cout << "Dodam produkt" << endl;
 		}
 
+		//Usuwanie produktu przez administatora z magazynu. Zostanie równie¿ usuniêty z pliku baza_produktow.txt
 		if (chooseAdmin == 2)
 		{
-			//usuwanie produktu
-			//usuwanie - usuwamy z tablicy rekord o danym id a nastepnie wyswietlamy ponownie liste
 			system("cls");
-
 			cout << "-------------------------------------------------------------" << endl;
 			cout << "	Usuwanie produktow z magazynu " << endl;
 			cout << "-------------------------------------------------------------" << endl << endl;
 
+			//wyswietlenie listy produktow
 			magazyn.wyswietlListeProduktow();
-
 			int wybor;
 			cout << "x. Anuluj." << endl;
 			cin >> wybor;
@@ -276,8 +252,8 @@ ekranStartowy:
 				goto adminMenu;
 			}
 			magazyn.usunProdukt(wybor);
-			//testuje nadpisywanie pliku itd
-			//usuwanie elementu tablicy
+			
+			//Przesuniêcie tablicy o 1 w lewo, po usuniêciu produktu
 			for (int q = 0; q < 100; q++)
 			{
 				if (wybor-1==q)
@@ -290,25 +266,15 @@ ekranStartowy:
 				}
 			}
 
-			tablicaProduktow[wybor - 2].wyswietlProdukt();
-				wait(3);
-
-			 tablicaProduktow[wybor - 1].wyswietlProdukt();
-			 wait(6);
-			 tablicaProduktow[wybor].wyswietlProdukt();
-			 
-
-			//czyszczenie pliku txt
+			//czyszczenie pliku baza_produktow.txt
 			std::ofstream ofs;
 			ofs.open("baza_produktow.txt", std::ofstream::out | std::ofstream::trunc);
 			ofs.close();
+
 			//wpisanie nowej tablicy do pliku
-			//
 			ofstream zapis("baza_produktow.txt");
 			for (int i = 0; i < 100; i++)
 			{
-				
-
 				if (tablicaProduktow[i].zwrocNazwe() != "")
 				{
 					if (i == 0)
@@ -326,18 +292,14 @@ ekranStartowy:
 				}
 			}
 			zapis.close();
-			//magazyn.wyswietlListeProduktow();
 			odczyt.close();
-
-			system("pause");
 			goto adminMenu;
-
 
 		}
 
+		//Wyswietlanie produktu przez administratora
 		if (chooseAdmin == 3)
 		{
-			//wyswietlenie produktów
 			system("cls");
 			cout << "-------------------------------------------------------------" << endl;
 			cout << "	Wyswietlenie produktow z magazynu " << endl;
@@ -349,7 +311,6 @@ ekranStartowy:
 			cout << "1. Powrot do panelu administratora." << endl;
 			cout << "2. Powrot do menu glownego." << endl;
 			cin >> wybor;
-
 			if (wybor == 1)
 			{
 				goto adminMenu;
@@ -359,7 +320,8 @@ ekranStartowy:
 				goto ekranStartowy;
 			}
 		}
-		
+	
+		//
 		if (chooseAdmin == 4)
 		{
 			goto ekranStartowy;
