@@ -349,7 +349,7 @@ void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 	wait(1);
 }
 
-Zamowienie* oplacenieKoszyka(Konto tablicaKlientow[], int idKlienta)
+/*Zamowienie* oplacenieKoszyka(Konto tablicaKlientow[], int idKlienta)
 {
 	Koszyk* koszykKlienta;
 	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
@@ -362,7 +362,7 @@ Zamowienie* oplacenieKoszyka(Konto tablicaKlientow[], int idKlienta)
 
 
 	//return tablicaKlientow[idKlienta].zwrocAdresZamowienia();
-}
+}*/
 
 //SEKCJA METOD ADMINA
 
@@ -864,7 +864,7 @@ ekranStartowy:
 			if (wyborOpcji == 3)
 			{
 				Zamowienie* zamowienieKlienta;
-				zamowienieKlienta = oplacenieKoszyka(tablicaKlientow, idKlienta);
+				//zamowienieKlienta = oplacenieKoszyka(tablicaKlientow, idKlienta);
 			}
 		}
 
