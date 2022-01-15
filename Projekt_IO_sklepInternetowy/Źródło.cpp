@@ -307,12 +307,13 @@ int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 
 	koszykKlienta->wypiszKoszyk();
 
-	while (wybor < 1 || wybor > 3)
+	while (wybor < 1 || wybor > 4)
 	{
 		cout << endl << endl << "1. Dodaj nowy produkt do koszyka" << endl << endl;
 		cout << "2. Usun produkt z koszyka" << endl << endl;
 		cout << "3. Oplac koszyk" << endl << endl;
-		cout << "Wybierz opcje 1 - 3: ";
+		cout << "4. Powrot do panelu klienta" << endl << endl;
+		cout << "Wybierz opcje 1 - 4: ";
 		cin >> wybor;
 		system("cls");
 		return wybor;
@@ -782,53 +783,74 @@ ekranStartowy:
 			zapisZamowien.close();
 			goto ekranStartowy;
 		}
+	}
 
 		//menu klienta
-		if (numerOpcji == 3)
+	if (numerOpcji == 3)
+	{
+		cout << "-------------------------------------------------------------" << endl;
+		cout << "	 Aby kontynuowac zaloguj sie lub utworz nowe konto" << endl;
+		cout << "-------------------------------------------------------------" << endl << endl;
+
+		int wyborOpcji = menuLogowania();
+		int idKlienta = 0;
+
+		//logowanie na istniejace konto
+		if (wyborOpcji == 1)
 		{
-			cout << "-------------------------------------------------------------" << endl;
-			cout << "	 Aby kontynuowac zaloguj sie lub utworz nowe konto" << endl;
-			cout << "-------------------------------------------------------------" << endl << endl;
+			idKlienta = logowanieKlienta(tablicaKlientow, iKlienckie);
+			goto klientMenu;
+		}
 
-			int wyborOpcji = menuLogowania();
-			int idKlienta = 0;
+		//utworzenie nowego konta
+		if (wyborOpcji == 2)
+		{
+			idKlienta = tworzenieKontaKlienta(tablicaKlientow, &iKlienckie);
+			goto klientMenu;
+		}
 
-			//logowanie na istniejace konto
+		//powrot do ekranu startowego
+		if (wyborOpcji == 3)
+		{
+			goto ekranStartowy;
+		}
+
+	klientMenu:
+		wyborOpcji = menuKlienta();
+
+		//wyswietlanie produktow 
+		if (wyborOpcji == 1)
+		{
+			wyborOpcji = wyswietlanieProduktowKlient(magazyn);
+
+			//dodanie przedmiotu do koszyka
 			if (wyborOpcji == 1)
 			{
-				idKlienta = logowanieKlienta(tablicaKlientow, iKlienckie);
+				dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
 				goto klientMenu;
 			}
 
-			//utworzenie nowego konta
+			//powrot do panelu klienta
 			if (wyborOpcji == 2)
 			{
-				idKlienta = tworzenieKontaKlienta(tablicaKlientow, &iKlienckie);
 				goto klientMenu;
 			}
+		}
 
-			//powrot do ekranu startowego
-			if (wyborOpcji == 3)
-			{
-				goto ekranStartowy;
-			}
+		if (wyborOpcji == 2)
+		{
+			wyborOpcji = menuKoszyka(tablicaKlientow, idKlienta);
 
-		klientMenu:
-			wyborOpcji = menuKlienta();
-
-			//wyswietlanie produktow 
 			if (wyborOpcji == 1)
 			{
 				wyborOpcji = wyswietlanieProduktowKlient(magazyn);
 
-				//dodanie przedmiotu do koszyka
 				if (wyborOpcji == 1)
 				{
 					dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
 					goto klientMenu;
 				}
 
-				//powrot do panelu klienta
 				if (wyborOpcji == 2)
 				{
 					goto klientMenu;
@@ -837,43 +859,27 @@ ekranStartowy:
 
 			if (wyborOpcji == 2)
 			{
-				wyborOpcji = menuKoszyka(tablicaKlientow, idKlienta);
-
-				if (wyborOpcji == 1)
-				{
-					wyborOpcji = wyswietlanieProduktowKlient(magazyn);
-
-					if (wyborOpcji == 1)
-					{
-						dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
-						goto klientMenu;
-					}
-
-					if (wyborOpcji == 2)
-					{
-						goto klientMenu;
-					}
-				}
-
-				if (wyborOpcji == 2)
-				{
-					usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
-					goto klientMenu;
-				}
+				usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
+				goto klientMenu;
+			}
 
 			if (wyborOpcji == 3)
 			{
 				Zamowienie* zamowienieKlienta;
 				//zamowienieKlienta = oplacenieKoszyka(tablicaKlientow, idKlienta);
 			}
-		}
 
-			if (wyborOpcji == 3)
+			if (wyborOpcji == 4)
 			{
-				goto ekranStartowy;
+				goto klientMenu;
 			}
 		}
 
-		system("pause");
+		if (wyborOpcji == 3)
+		{
+			goto ekranStartowy;
+		}
 	}
+
+	system("pause");
 }
