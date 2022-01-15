@@ -12,6 +12,7 @@ private:
 public:
 	Koszyk();
 	void dodajItem(Item dodawany);
-	void usunItem(int id);
+	void usunItem(int idPrzedmiotuDoUsuniecia);
 	void wypiszKoszyk();
+	int zwrocId();
 };

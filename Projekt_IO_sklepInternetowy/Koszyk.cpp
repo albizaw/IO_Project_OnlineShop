@@ -13,8 +13,28 @@ void Koszyk::dodajItem(Item dodawany)
 	id++;
 }
 
-void Koszyk::usunItem(int id)
+int Koszyk::zwrocId()
 {
+	return id;
+}
+
+void Koszyk::usunItem(int idPrzedmiotuDoUsuniecia)
+{
+	Item tmp[10];
+	int i = 0;
+	int j = 0;
+	
+	while (i < id && j < id)
+	{
+		if (i = idPrzedmiotuDoUsuniecia) i++;
+		tmp[j] = produkt[i];
+
+		j++;
+		i++;
+	}
+	id--;
+
+	for (i = 0; i < id; i++) produkt[i] = tmp[i];
 }
 
 void Koszyk::wypiszKoszyk()

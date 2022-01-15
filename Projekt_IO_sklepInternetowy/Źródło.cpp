@@ -291,6 +291,7 @@ void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzed
 	cout << endl << "Czy chcesz dodac kolejny produkt?" << endl << "1. Tak"
 		<< endl << "2. Nie" << endl << endl;
 	if (_getch() == '1') dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaPrzedmiotow);
+	wait(5);
 }
 
 int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
@@ -315,6 +316,36 @@ int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 		system("cls");
 		return wybor;
 	}
+}
+
+void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
+{
+	system("cls");
+	cout << "-------------------------------------------------------------" << endl;
+	cout << "	Usuwanie produktow z koszyka " << endl;
+	cout << "-------------------------------------------------------------" << endl << endl;
+
+	int idDoUsuniecia = 0;
+	Koszyk* koszykKlienta;
+	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
+	koszykKlienta->wypiszKoszyk();
+
+	cout << endl << "Wybierz id przedmiotu do usuniecia: ";
+	cin >> idDoUsuniecia;
+	while (idDoUsuniecia<1 || idDoUsuniecia > koszykKlienta->zwrocId())
+	{
+		cout << endl << "Podane id jest nie prawidlowe, sprobuj jeszcze raz: ";
+		cin >> idDoUsuniecia;
+	}
+	koszykKlienta->usunItem(idDoUsuniecia);
+
+	cout << endl;
+	koszykKlienta->wypiszKoszyk();
+
+	cout << endl << "Czy chcesz usunac kolejny produkt?" << endl << "1. Tak"
+		<< endl << "2. Nie" << endl << endl;
+	if (_getch() == '1') usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
+	wait(5);
 }
 
 //SEKCJA METOD ADMINA
@@ -706,7 +737,8 @@ ekranStartowy:
 
 			if (wyborOpcji == 2)
 			{
-				//usun element z koszyka
+				usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
+				goto klientMenu;
 			}
 
 			if (wyborOpcji == 3)
