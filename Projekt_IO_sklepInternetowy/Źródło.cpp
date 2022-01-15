@@ -293,6 +293,30 @@ void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzed
 	if (_getch() == '1') dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaPrzedmiotow);
 }
 
+int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
+{
+	cout << "-------------------------------------------------------------" << endl;
+	cout << "	 Twoj koszyk:" << endl;
+	cout << "-------------------------------------------------------------" << endl << endl;
+
+	Koszyk* koszykKlienta;
+	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
+	int wybor = 0;
+
+	koszykKlienta->wypiszKoszyk();
+
+	while (wybor < 1 || wybor > 3)
+	{
+		cout << endl << endl << "1. Dodaj nowy produkt do koszyka" << endl << endl;
+		cout << "2. Usun produkt z koszyka" << endl << endl;
+		cout << "3. Oplac koszyk" << endl << endl;
+		cout << "Wybierz opcje 1 - 3: ";
+		cin >> wybor;
+		system("cls");
+		return wybor;
+	}
+}
+
 //SEKCJA METOD ADMINA
 
 bool logowanieAdministatora(Konto adminLogowanie) {
@@ -662,7 +686,33 @@ ekranStartowy:
 
 		if (wyborOpcji == 2)
 		{
-			//koszyk znowu :(
+			wyborOpcji = menuKoszyka(tablicaKlientow, idKlienta);
+
+			if (wyborOpcji == 1)
+			{
+				wyborOpcji = wyswietlanieProduktowKlient(magazyn);
+
+				if (wyborOpcji == 1)
+				{
+					dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
+					goto klientMenu;
+				}
+
+				if (wyborOpcji == 2)
+				{
+					goto klientMenu;
+				}
+			}
+
+			if (wyborOpcji == 2)
+			{
+				//usun element z koszyka
+			}
+
+			if (wyborOpcji == 3)
+			{
+				//oplacenie zamowienia
+			}
 		}
 
 		if (wyborOpcji == 3)

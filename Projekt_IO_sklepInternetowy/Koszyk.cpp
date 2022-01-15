@@ -22,7 +22,7 @@ void Koszyk::wypiszKoszyk()
 	
 	for (int i = 0; i < id; i ++)
 	{
-		cout << produkt[i].zwrocNazweProduktu() << " "
+		cout << i+1 << ". " << produkt[i].zwrocNazweProduktu() << " "
 			<< produkt[i].zwrocIloscSztuk() << endl;
 	}
 }
