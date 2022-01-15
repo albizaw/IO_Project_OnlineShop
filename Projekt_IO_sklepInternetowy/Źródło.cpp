@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <conio.h>
 #include <Windows.h>
@@ -452,6 +453,21 @@ int main()
 	}
 	odczytKlientow.close();
 
+	//utworzenie bazy zamowien
+	string linia;
+	ifstream odczytZamowien("baza_zamowien.txt");
+	Zamowienie tablicaZamowien[100];
+	int idZamowienia = 0;
+	while (getline(odczytZamowien, linia))
+	{
+		if (idZamowienia > 99) break;
+		int pozPrzecinka = linia.find(",");
+		//int	pozKlamry = linia.find("{");
+		tablicaZamowien[idZamowienia].ustawZamowienie(idZamowienia + 1, linia.substr(0, (pozPrzecinka - 1)), linia.substr(++pozPrzecinka));
+		idZamowienia++;
+	}
+	odczytZamowien.close();
+
 ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
 	Konto sprzedawca("Dawid", "Pala", "1234567890");
@@ -616,7 +632,7 @@ ekranStartowy:
 	//menu sprzedawcy
 	if (numerOpcji == 2)
 	{
-		
+
 		bool logowanieSprzedawca = logowanieSprzedawcy(sprzedawca);
 		int licznik = 1;
 		while (logowanieSprzedawca == 0 && licznik != 3)
@@ -633,9 +649,8 @@ ekranStartowy:
 			goto ekranStartowy;
 		}
 
-		system("cls");
 	sprzedawcaMenu:
-
+		system("cls");
 		cout << "-------------------------------------------------------------" << endl;
 		cout << "	Poprawnie zalogowano do panelu sprzedawcy " << endl;
 		cout << "-------------------------------------------------------------" << endl << endl;
@@ -644,94 +659,161 @@ ekranStartowy:
 
 		if (chooseDealer == 1)
 		{
-			//wyswietlanie zamowien
-			cout << "Dodam produkt" << endl;
+			for (int i = 0; i < idZamowienia; i++)
+			{
+				tablicaZamowien[i].wypiszZamowienie();
+			}
+			int wybor;
+			cout << "1. Powrot do panelu sprzedawcy." << endl;
+			cout << "2. Powrot do menu glownego." << endl;
+			cin >> wybor;
+
+			if (wybor == 1)
+			{
+				goto sprzedawcaMenu;
+			}
+			else if (wybor == 2)
+			{
+				goto ekranStartowy;
+			}
+
 		}
 
 		if (chooseDealer == 2)
 		{
 			//realizacja zamowien
+			/*
+			zmiana statusu zamówienia na zrealizowane w bazie zamówien
+			*/
+			while (true)
+			{
+				system("cls");
+				for (int i = 0; i < idZamowienia; i++)
+				{
+					tablicaZamowien[i].wypiszZamowienie();
+				}
+				cout << "Wybierz id zamowienia do zrealizowania(aby wyjsc nacisnij X): ";
+				string doRealizacji;
+				cin >> doRealizacji;
+				if (doRealizacji == "X" || doRealizacji == "x") goto sprzedawcaMenu;
+				int realizacja = 0;
+				stringstream geek(doRealizacji);
+				geek >> realizacja;
+				if (realizacja >= 1 && realizacja <= 100)
+				{
+					tablicaZamowien[realizacja - 1].realizujZamowienie();
+					wait(3);
+				}
+				else
+				{
+					cout << "Podaj poprawny identyfikator" << endl;
+					wait(2);
+				}
+			}
 		}
 
-		if (chooseDealer == 3)	
+		if (chooseDealer == 3)
 		{
-			//anulowanie zamowien
+			while (true)
+			{
+				system("cls");
+				for (int i = 0; i < idZamowienia; i++)
+				{
+					tablicaZamowien[i].wypiszZamowienie();
+				}
+				cout << "Wybierz id zamowienia do anulowania(aby wyjsc nacisnij X): ";
+				string doAnulowania;
+				cin >> doAnulowania;
+				if (doAnulowania == "X" || doAnulowania == "x") goto sprzedawcaMenu;
+				int anulowanie = 0;
+				stringstream geek(doAnulowania);
+				geek >> anulowanie;
+				if (anulowanie >= 1 && anulowanie <= 100)
+				{
+					if (tablicaZamowien[anulowanie - 1].anulujZamowienie())
+					{
+						for (int i = anulowanie - 1; i <= idZamowienia; i++)
+						{
+							tablicaZamowien[i + 1].zmienId();
+							tablicaZamowien[i] = tablicaZamowien[i + 1];
+						}
+						idZamowienia--;
+						wait(3);
+					}
+					else
+					{
+						cout << "Zamowienie nie moze zostac anulowane!" << endl;
+						wait(2);
+					}
+				}
+				else
+				{
+					cout << "Podaj poprawny identyfikator" << endl;
+					wait(2);
+				}
+			}
 		}
 
 		if (chooseDealer == 4)
 		{
+			std::ofstream ofs;
+			ofs.open("baza_zamowien.txt", std::ofstream::out | std::ofstream::trunc);
+			ofs.close();
+			ofstream zapisZamowien("baza_zamowien.txt");
+			for (int i = 0; i < idZamowienia; i++)
+			{
+				zapisZamowien << tablicaZamowien[i].zwrocStatus() << "," << tablicaZamowien[i].zwrocOplacenie() << endl;
+			}
+			zapisZamowien.close();
 			goto ekranStartowy;
 		}
 
-
-	}
-
-	//menu klienta
-	if (numerOpcji == 3)
-	{
-		cout << "-------------------------------------------------------------" << endl;
-		cout << "	 Aby kontynuowac zaloguj sie lub utworz nowe konto" << endl;
-		cout << "-------------------------------------------------------------" << endl << endl;
-
-		int wyborOpcji = menuLogowania();
-		int idKlienta = 0;
-
-		//logowanie na istniejace konto
-		if (wyborOpcji == 1)
+		//menu klienta
+		if (numerOpcji == 3)
 		{
-			idKlienta = logowanieKlienta(tablicaKlientow, iKlienckie);
-			goto klientMenu;
-		}
-		
-		//utworzenie nowego konta
-		if (wyborOpcji == 2)
-		{
-			idKlienta = tworzenieKontaKlienta(tablicaKlientow, &iKlienckie);
-			goto klientMenu;
-		}
+			cout << "-------------------------------------------------------------" << endl;
+			cout << "	 Aby kontynuowac zaloguj sie lub utworz nowe konto" << endl;
+			cout << "-------------------------------------------------------------" << endl << endl;
 
-		//powrot do ekranu startowego
-		if (wyborOpcji == 3)
-		{
-			goto ekranStartowy;
-		}
+			int wyborOpcji = menuLogowania();
+			int idKlienta = 0;
 
-	klientMenu:
-		wyborOpcji = menuKlienta();
-
-		//wyswietlanie produktow 
-		if (wyborOpcji == 1)
-		{
-			wyborOpcji = wyswietlanieProduktowKlient(magazyn);
-
-			//dodanie przedmiotu do koszyka
+			//logowanie na istniejace konto
 			if (wyborOpcji == 1)
 			{
-				dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
+				idKlienta = logowanieKlienta(tablicaKlientow, iKlienckie);
 				goto klientMenu;
 			}
 
-			//powrot do panelu klienta
+			//utworzenie nowego konta
 			if (wyborOpcji == 2)
 			{
+				idKlienta = tworzenieKontaKlienta(tablicaKlientow, &iKlienckie);
 				goto klientMenu;
 			}
-		}
 
-		if (wyborOpcji == 2)
-		{
-			wyborOpcji = menuKoszyka(tablicaKlientow, idKlienta);
+			//powrot do ekranu startowego
+			if (wyborOpcji == 3)
+			{
+				goto ekranStartowy;
+			}
 
+		klientMenu:
+			wyborOpcji = menuKlienta();
+
+			//wyswietlanie produktow 
 			if (wyborOpcji == 1)
 			{
 				wyborOpcji = wyswietlanieProduktowKlient(magazyn);
 
+				//dodanie przedmiotu do koszyka
 				if (wyborOpcji == 1)
 				{
 					dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
 					goto klientMenu;
 				}
 
+				//powrot do panelu klienta
 				if (wyborOpcji == 2)
 				{
 					goto klientMenu;
@@ -740,21 +822,42 @@ ekranStartowy:
 
 			if (wyborOpcji == 2)
 			{
-				usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
-				goto klientMenu;
+				wyborOpcji = menuKoszyka(tablicaKlientow, idKlienta);
+
+				if (wyborOpcji == 1)
+				{
+					wyborOpcji = wyswietlanieProduktowKlient(magazyn);
+
+					if (wyborOpcji == 1)
+					{
+						dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
+						goto klientMenu;
+					}
+
+					if (wyborOpcji == 2)
+					{
+						goto klientMenu;
+					}
+				}
+
+				if (wyborOpcji == 2)
+				{
+					usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
+					goto klientMenu;
+				}
+
+				if (wyborOpcji == 3)
+				{
+					//oplacenie zamowienia
+				}
 			}
 
 			if (wyborOpcji == 3)
 			{
-				//oplacenie zamowienia
+				goto ekranStartowy;
 			}
 		}
 
-		if (wyborOpcji == 3)
-		{
-			goto ekranStartowy;
-		}
+		system("pause");
 	}
-
-	system("pause");
 }
