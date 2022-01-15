@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include "Koszyk.h"
-#include <iostream>;
+#include <iostream>
+
 using namespace std;
 
 class Konto {
@@ -13,5 +14,6 @@ private:
 public:
 	string getPassword();
 	Konto();
-	Konto(string imieKlienta, string nazwiskoKlienta, string haslo);
+	Konto(string imieKlienta, string nazwiskoKlienta, string hasloKlienta);
+	void dodajKlienta(string imieKlienta, string nazwiskoKlienta, string hasloKlienta);
 };

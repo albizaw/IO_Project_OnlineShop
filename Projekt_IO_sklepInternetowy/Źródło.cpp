@@ -80,6 +80,68 @@ int menuSprzedawcy()
 	}
 }
 
+
+//METODY DLA MENU KLIENTA
+
+int menuLogowania()
+{
+	int wybor = 0;
+
+	while (wybor < 1 || wybor > 3)
+	{
+		cout << "1. Zaloguj sie do swojego konta" << endl << endl;
+		cout << "2. Utworz nowe konto" << endl << endl;
+		cout << "3. Wyjscie do ekranu startowego" << endl << endl;
+		cout << "Wybierz opcje 1 - 3: ";
+		cin >> wybor;
+		system("cls");
+		return wybor;
+	}
+}
+
+void tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
+{
+	cout << "-------------------------------------------------------------" << endl;
+	cout << "	 W celu utworzenia nowego konta podaj wymagane dane:" << endl;
+	cout << "    - imie" << endl << "    - nazwisko" << endl << "    - haslo" << endl;
+	cout << "-------------------------------------------------------------" << endl << endl;
+
+	string imie, nazwisko, haslo;
+
+	cout << "podaj imie: ";
+	cin >> imie;
+	cout << endl;
+
+	cout << "podaj nazwisko: ";
+	cin >> nazwisko;
+	cout << endl;
+
+	cout << "podaj haslo: ";
+	cin >> haslo;
+	cout << endl;
+
+	ofstream zapis("baza_klientow.txt", ios_base::app);
+	zapis << endl << imie << endl;
+	zapis << nazwisko << endl;
+	zapis << haslo;
+	zapis.close();
+	*j = *j + 1;
+	tablicaKlientow[*j].dodajKlienta(imie, nazwisko, haslo);
+}
+
+void logowanie(Konto tablicaKlientow[], int i)
+{
+	cout << "-------------------------------------------------------------" << endl;
+	cout << "	 W celu zalogowania podaj wymagane dane:" << endl;
+	cout << "    - imie" << endl << "    - nazwisko" << endl << "    - haslo" << endl;
+	cout << "-------------------------------------------------------------" << endl << endl;
+
+	string imie, nazwisko, haslo;
+}
+
+
+//SEKCJA METOD ADMINA
+
 bool logowanieAdministatora(Konto adminLogowanie) {
 	//to co robi administrator
 		//logowanie
@@ -167,6 +229,21 @@ int main()
 	}
 	odczyt.close();
 	
+	//utworzenie bazy klientow
+	Konto tablicaKlientow[100];
+	string imie;
+	string nazwisko;
+	string haslo;
+	int iKlienckie = 0;
+	ifstream odczytKlientow("baza_klientow.txt");
+	while (!odczytKlientow.eof())
+	{
+		odczytKlientow >> imie >> nazwisko >> haslo;
+		tablicaKlientow[iKlienckie].dodajKlienta(imie, nazwisko, haslo);
+		iKlienckie++;
+	}
+	odczytKlientow.close();
+
 ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
 	Konto sprzedawca("Dawid", "Pala", "1234567890");
@@ -381,8 +458,32 @@ ekranStartowy:
 
 	}
 
+	//menu klienta
 	if (numerOpcji == 3)
 	{
+		cout << "-------------------------------------------------------------" << endl;
+		cout << "	 Aby kontynuowac zaloguj sie lub utworz nowe konto" << endl;
+		cout << "-------------------------------------------------------------" << endl << endl;
+
+		int wyborOpcji = menuLogowania();
+
+		//logowanie na istniejace konto
+		if (wyborOpcji == 1)
+		{
+			
+		}
+		
+		//utworzenie nowego konta
+		if (wyborOpcji == 2)
+		{
+			tworzenieKontaKlienta(tablicaKlientow, &iKlienckie);
+		}
+
+		//powrot do ekranu startowego
+		if (wyborOpcji == 3)
+		{
+			goto ekranStartowy;
+		}
 	}
 
 	system("pause");
