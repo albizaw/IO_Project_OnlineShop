@@ -699,16 +699,19 @@ ekranStartowy:
 	klientMenu:
 		wyborOpcji = menuKlienta();
 
+		//wyswietlanie produktow 
 		if (wyborOpcji == 1)
 		{
 			wyborOpcji = wyswietlanieProduktowKlient(magazyn);
 
+			//dodanie przedmiotu do koszyka
 			if (wyborOpcji == 1)
 			{
 				dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
 				goto klientMenu;
 			}
 
+			//powrot do panelu klienta
 			if (wyborOpcji == 2)
 			{
 				goto klientMenu;
