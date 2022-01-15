@@ -16,4 +16,7 @@ public:
 	Konto();
 	Konto(string imieKlienta, string nazwiskoKlienta, string hasloKlienta);
 	void dodajKlienta(string imieKlienta, string nazwiskoKlienta, string hasloKlienta);
+	string zwrocImie();
+	string zwrocNazwisko();
+	void wypisz();
 };

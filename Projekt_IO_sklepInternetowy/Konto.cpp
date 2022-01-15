@@ -8,6 +8,22 @@ string Konto::getPassword()
 	return Konto::haslo;
 }
 
+string Konto::zwrocImie()
+{
+	return imie;
+}
+
+string Konto::zwrocNazwisko()
+{
+	return nazwisko;
+}
+
+void Konto::wypisz()
+{
+	cout << "imie = " << zwrocImie() << endl << "nazwisko = " << zwrocNazwisko()
+		<< endl << "haslo = " << getPassword() << endl;
+}
+
 Konto::Konto()
 {
 	imie = "";

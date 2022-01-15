@@ -129,7 +129,7 @@ void tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 	tablicaKlientow[*j].dodajKlienta(imie, nazwisko, haslo);
 }
 
-void logowanie(Konto tablicaKlientow[], int i)
+int logowanieKlienta(Konto tablicaKlientow[], int i)
 {
 	cout << "-------------------------------------------------------------" << endl;
 	cout << "	 W celu zalogowania podaj wymagane dane:" << endl;
@@ -137,6 +137,87 @@ void logowanie(Konto tablicaKlientow[], int i)
 	cout << "-------------------------------------------------------------" << endl << endl;
 
 	string imie, nazwisko, haslo;
+	bool czyDanePoprawne[3] = { false, false, false };
+	int j = 0;
+
+	cout << "podaj imie: ";
+	cin >> imie;
+	for (int j = 0; j <= i; j++)
+	{
+		if (tablicaKlientow[j].zwrocImie() == imie)
+		{
+			czyDanePoprawne[0] = true;
+			break;
+		}
+	}
+
+	while (!czyDanePoprawne[0])
+	{
+		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj imie: ";
+		cin >> imie;
+		if (tablicaKlientow[j].zwrocImie() == imie)
+		{
+			czyDanePoprawne[0] = true;
+			break;
+		}
+	}
+
+	cout << "podaj nazwisko: ";
+	cin >> nazwisko;
+	//for (j = 0; j <= i; j++)
+	//{
+		if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
+		{
+			czyDanePoprawne[1] = true;
+			//break;
+		}
+	//}
+
+	while (!czyDanePoprawne[1])
+	{
+		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj nazwisko: ";
+		cin >> nazwisko;
+		//for (int j = 0; j <= i; j++)
+		//{
+			if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
+			{
+				czyDanePoprawne[1] = true;
+				break;
+			}
+		//}
+	}
+
+	cout << "podaj haslo: ";
+	cin >> haslo;
+	//for (j = 0; j <= i; j++)
+	//{
+		if (tablicaKlientow[j].getPassword() == haslo)
+		{
+			czyDanePoprawne[2] = true;
+			//break;
+		}
+	//}
+
+	while (!czyDanePoprawne[2])
+	{
+		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj haslo: ";
+		cin >> haslo;
+		//for (j = 0; j <= i; j++)
+		//{
+			if (tablicaKlientow[j].getPassword() == haslo)
+			{
+				czyDanePoprawne[2] = true;
+				break;
+			}
+		//}
+	}
+
+	if (czyDanePoprawne[0] && czyDanePoprawne[1] & czyDanePoprawne[2])
+	{
+		cout << "Pomyslnie zalogowano" << endl << "j = " << j << endl;
+		return j;
+	}
+
 }
 
 
@@ -243,6 +324,14 @@ int main()
 		iKlienckie++;
 	}
 	odczytKlientow.close();
+
+	cout << "TEST" << endl;
+	for (int a = 0; a < iKlienckie; a++)
+	{
+		cout << "a = " << a << endl;
+		tablicaKlientow[a].wypisz();
+	}
+	system("pause");
 
 ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
@@ -470,7 +559,7 @@ ekranStartowy:
 		//logowanie na istniejace konto
 		if (wyborOpcji == 1)
 		{
-			
+			int idKlienta = logowanieKlienta(tablicaKlientow, iKlienckie);
 		}
 		
 		//utworzenie nowego konta
