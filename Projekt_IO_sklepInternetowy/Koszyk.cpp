@@ -37,6 +37,11 @@ void Koszyk::usunItem(int idPrzedmiotuDoUsuniecia)
 	for (i = 0; i < id; i++) produkt[i] = tmp[i];
 }
 
+Zamowienie* Koszyk::zwrocAdresZamowienia()
+{
+	return noweZamowienie;
+}
+
 void Koszyk::wypiszKoszyk()
 {
 	
