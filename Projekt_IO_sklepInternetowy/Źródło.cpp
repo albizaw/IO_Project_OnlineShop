@@ -292,7 +292,7 @@ void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzed
 	cout << endl << "Czy chcesz dodac kolejny produkt?" << endl << "1. Tak"
 		<< endl << "2. Nie" << endl << endl;
 	if (_getch() == '1') dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaPrzedmiotow);
-	wait(5);
+	wait(1);
 }
 
 int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
@@ -346,7 +346,22 @@ void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 	cout << endl << "Czy chcesz usunac kolejny produkt?" << endl << "1. Tak"
 		<< endl << "2. Nie" << endl << endl;
 	if (_getch() == '1') usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
-	wait(5);
+	wait(1);
+}
+
+Zamowienie* oplacenieKoszyka(Konto tablicaKlientow[], int idKlienta)
+{
+	Koszyk* koszykKlienta;
+	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
+
+	system("cls");
+
+	cout << "Czy mozemy Ci zaufac, ze oplaciles zamowienie?" << endl
+		<< "1. Tak" << endl << "2. Jeszcze jak" << endl << "Wybierz cokolwiek" << endl;
+	system("pause");
+
+
+	//return tablicaKlientow[idKlienta].zwrocAdresZamowienia();
 }
 
 //SEKCJA METOD ADMINA
@@ -846,11 +861,12 @@ ekranStartowy:
 					goto klientMenu;
 				}
 
-				if (wyborOpcji == 3)
-				{
-					//oplacenie zamowienia
-				}
+			if (wyborOpcji == 3)
+			{
+				Zamowienie* zamowienieKlienta;
+				zamowienieKlienta = oplacenieKoszyka(tablicaKlientow, idKlienta);
 			}
+		}
 
 			if (wyborOpcji == 3)
 			{

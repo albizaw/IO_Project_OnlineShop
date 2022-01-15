@@ -15,4 +15,5 @@ public:
 	void usunItem(int idPrzedmiotuDoUsuniecia);
 	void wypiszKoszyk();
 	int zwrocId();
+	Zamowienie* zwrocAdresZamowienia();
 };
