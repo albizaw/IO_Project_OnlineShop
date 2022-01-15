@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 string Konto::getPassword()
 {
 	return Konto::haslo;

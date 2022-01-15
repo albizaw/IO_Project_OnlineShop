@@ -81,16 +81,13 @@ int menuSprzedawcy()
 }
 
 bool logowanieAdministatora(Konto adminLogowanie) {
-	//to co robi administrator
-		//logowanie
-	
+
 	string passAdmin = adminLogowanie.getPassword();
 	string passAdminRight = adminLogowanie.getPassword();
 	cout << "Wprowadz haslo administratora:	";
 	for (int i = 0; i < passAdminRight.length(); i++)
 	{
 		passAdmin[i] = _getch();
-		
 		system("cls");
 		cout << "Wprowadz haslo administratora:	";
 

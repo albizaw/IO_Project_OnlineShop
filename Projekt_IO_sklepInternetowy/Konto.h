@@ -11,6 +11,10 @@ private:
 	string haslo;
 	Koszyk* koszykKlienta;
 public:
+	/**
+		* Zwraca haslo utworzonego uzytkownika.
+		* @return haslo - typ string
+		*/
 	string getPassword();
 	Konto();
 	Konto(string imieKlienta, string nazwiskoKlienta, string haslo);
