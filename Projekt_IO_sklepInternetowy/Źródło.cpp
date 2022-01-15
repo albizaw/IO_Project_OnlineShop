@@ -360,7 +360,7 @@ Zamowienie* oplacenieKoszyka(Konto tablicaKlientow[], int idKlienta)
 	system("pause");
 
 
-	return tablicaKlientow[idKlienta].zwrocAdresZamowienia();
+	//return tablicaKlientow[idKlienta].zwrocAdresZamowienia();
 }
 
 //SEKCJA METOD ADMINA
