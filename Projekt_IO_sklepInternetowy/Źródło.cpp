@@ -99,7 +99,7 @@ int menuLogowania()
 	}
 }
 
-void tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
+int tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 {
 	cout << "-------------------------------------------------------------" << endl;
 	cout << "	 W celu utworzenia nowego konta podaj wymagane dane:" << endl;
@@ -127,6 +127,7 @@ void tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 	zapis.close();
 	*j = *j + 1;
 	tablicaKlientow[*j].dodajKlienta(imie, nazwisko, haslo);
+	return *j;
 }
 
 int logowanieKlienta(Konto tablicaKlientow[], int i)
@@ -214,12 +215,83 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 
 	if (czyDanePoprawne[0] && czyDanePoprawne[1] & czyDanePoprawne[2])
 	{
-		cout << "Pomyslnie zalogowano" << endl << "j = " << j << endl;
 		return j;
 	}
 
 }
 
+int menuKlienta()
+{
+	system("cls");
+	
+	int wybor = 0;
+
+	cout << "-------------------------------------------------------------" << endl;
+	cout << "	 Pomyslnie zalogowano. Wybierz co chcesz zrobic:" << endl;
+	cout << "-------------------------------------------------------------" << endl << endl;
+	
+	while (wybor < 1 || wybor > 3)
+	{
+		cout << "1. Wyswietl liste produktow" << endl << endl;
+		cout << "2. Edytuj koszyk" << endl << endl;
+		cout << "3. Wyjscie do ekranu startowego (wylogowanie)" << endl << endl;
+		cout << "Wybierz opcje 1 - 3: ";
+		cin >> wybor;
+		system("cls");
+		return wybor;
+	}
+}
+
+int wyswietlanieProduktowKlient(Magazyn magazyn)
+{
+	system("cls");
+	cout << "-------------------------------------------------------------" << endl;
+	cout << "	Dostepne produkty:" << endl;
+	cout << "-------------------------------------------------------------" << endl << endl;
+
+	magazyn.wyswietlListeProduktow();
+
+	int wybor = 0;
+
+	while (wybor < 1 || wybor > 2)
+	{
+		cout << "1. Dodaj produkty do koszyka." << endl;
+		cout << "2. Powrot do panelu klienta." << endl << endl;
+		cin >> wybor;
+	}
+	
+	return wybor;
+}
+
+void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzedmiotow[])
+{
+	Koszyk *koszykKlienta;
+	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
+	int idPrzedmiotu;
+	int iloscPrzedmiotow;
+	bool dodacKolejnyProdukt = false;
+
+	cout << endl << "Podaj id przedmiotu, ktory chcesz dodac: ";
+	cin >> idPrzedmiotu;
+	idPrzedmiotu--;
+
+	cout << endl << "Podaj ilosc przedmiotow, ktore chcesz dodac: ";
+	cin >> iloscPrzedmiotow;
+	while (tablicaPrzedmiotow[idPrzedmiotu].zwrocIlosc() < iloscPrzedmiotow || iloscPrzedmiotow < 1)
+	{
+		cout << "Ilosc nieprawidlowa, podaj jeszcze raz: ";
+		cin >> iloscPrzedmiotow;
+	}
+
+	Item dodawanyItem(tablicaPrzedmiotow[idPrzedmiotu], iloscPrzedmiotow);
+
+	koszykKlienta->dodajItem(dodawanyItem);
+	koszykKlienta->wypiszKoszyk();
+
+	cout << endl << "Czy chcesz dodac kolejny produkt?" << endl << "1. Tak"
+		<< endl << "2. Nie" << endl << endl;
+	if (_getch() == '1') dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaPrzedmiotow);
+}
 
 //SEKCJA METOD ADMINA
 
@@ -324,14 +396,6 @@ int main()
 		iKlienckie++;
 	}
 	odczytKlientow.close();
-
-	cout << "TEST" << endl;
-	for (int a = 0; a < iKlienckie; a++)
-	{
-		cout << "a = " << a << endl;
-		tablicaKlientow[a].wypisz();
-	}
-	system("pause");
 
 ekranStartowy:
 	Konto administrator("Adam", "Minowski", "Silnehaslo123");
@@ -555,20 +619,52 @@ ekranStartowy:
 		cout << "-------------------------------------------------------------" << endl << endl;
 
 		int wyborOpcji = menuLogowania();
+		int idKlienta = 0;
 
 		//logowanie na istniejace konto
 		if (wyborOpcji == 1)
 		{
-			int idKlienta = logowanieKlienta(tablicaKlientow, iKlienckie);
+			idKlienta = logowanieKlienta(tablicaKlientow, iKlienckie);
+			goto klientMenu;
 		}
 		
 		//utworzenie nowego konta
 		if (wyborOpcji == 2)
 		{
-			tworzenieKontaKlienta(tablicaKlientow, &iKlienckie);
+			idKlienta = tworzenieKontaKlienta(tablicaKlientow, &iKlienckie);
+			goto klientMenu;
 		}
 
 		//powrot do ekranu startowego
+		if (wyborOpcji == 3)
+		{
+			goto ekranStartowy;
+		}
+
+	klientMenu:
+		wyborOpcji = menuKlienta();
+
+		if (wyborOpcji == 1)
+		{
+			wyborOpcji = wyswietlanieProduktowKlient(magazyn);
+
+			if (wyborOpcji == 1)
+			{
+				dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
+				goto klientMenu;
+			}
+
+			if (wyborOpcji == 2)
+			{
+				goto klientMenu;
+			}
+		}
+
+		if (wyborOpcji == 2)
+		{
+			//koszyk znowu :(
+		}
+
 		if (wyborOpcji == 3)
 		{
 			goto ekranStartowy;

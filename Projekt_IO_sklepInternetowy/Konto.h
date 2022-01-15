@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Konto {
+class Konto : public Koszyk {
 private:
 	string imie;
 	string nazwisko;
@@ -18,5 +18,6 @@ public:
 	void dodajKlienta(string imieKlienta, string nazwiskoKlienta, string hasloKlienta);
 	string zwrocImie();
 	string zwrocNazwisko();
+	Koszyk* zwrocAdresKoszyka();
 	void wypisz();
 };

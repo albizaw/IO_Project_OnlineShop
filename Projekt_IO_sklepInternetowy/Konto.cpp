@@ -24,6 +24,11 @@ void Konto::wypisz()
 		<< endl << "haslo = " << getPassword() << endl;
 }
 
+Koszyk* Konto::zwrocAdresKoszyka()
+{
+	return koszykKlienta;
+}
+
 Konto::Konto()
 {
 	imie = "";

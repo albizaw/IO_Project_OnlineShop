@@ -6,6 +6,7 @@ private:
 	int iloscSztuk;
 	Produkt dodanyProdukt;
 public:
+	Item();
 	Item(Produkt dodawanyProdukt, int ilosc);
 	int zwrocIloscSztuk();
 	string zwrocNazweProduktu();
