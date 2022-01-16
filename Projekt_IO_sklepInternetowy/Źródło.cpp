@@ -144,7 +144,7 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 
 	cout << "podaj imie: ";
 	cin >> imie;
-	for (int j = 0; j <= i; j++)
+	for (j = 0; j <= i; j++)
 	{
 		if (tablicaKlientow[j].zwrocImie() == imie)
 		{
@@ -157,61 +157,51 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 	{
 		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj imie: ";
 		cin >> imie;
-		if (tablicaKlientow[j].zwrocImie() == imie)
+		for (j = 0; j <= i; j++)
 		{
-			czyDanePoprawne[0] = true;
-			break;
+			if (tablicaKlientow[j].zwrocImie() == imie)
+			{
+				czyDanePoprawne[0] = true;
+				break;
+			}
 		}
 	}
 
 	cout << "podaj nazwisko: ";
 	cin >> nazwisko;
-	//for (j = 0; j <= i; j++)
-	//{
-		if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
-		{
-			czyDanePoprawne[1] = true;
-			//break;
-		}
-	//}
+	if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
+	{
+		czyDanePoprawne[1] = true;
+	}
 
 	while (!czyDanePoprawne[1])
 	{
 		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj nazwisko: ";
 		cin >> nazwisko;
-		//for (int j = 0; j <= i; j++)
-		//{
-			if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
-			{
-				czyDanePoprawne[1] = true;
-				break;
-			}
-		//}
+		if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
+		{
+			czyDanePoprawne[1] = true;
+			break;
+		}
 	}
 
 	cout << "podaj haslo: ";
 	cin >> haslo;
-	//for (j = 0; j <= i; j++)
-	//{
-		if (tablicaKlientow[j].getPassword() == haslo)
-		{
-			czyDanePoprawne[2] = true;
-			//break;
-		}
-	//}
+
+	if (tablicaKlientow[j].getPassword() == haslo)
+	{
+		czyDanePoprawne[2] = true;
+	}
 
 	while (!czyDanePoprawne[2])
 	{
 		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj haslo: ";
 		cin >> haslo;
-		//for (j = 0; j <= i; j++)
-		//{
 			if (tablicaKlientow[j].getPassword() == haslo)
 			{
 				czyDanePoprawne[2] = true;
 				break;
 			}
-		//}
 	}
 
 	if (czyDanePoprawne[0] && czyDanePoprawne[1] & czyDanePoprawne[2])
@@ -350,20 +340,6 @@ void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 	wait(1);
 }
 
-/*Zamowienie* oplacenieKoszyka(Konto tablicaKlientow[], int idKlienta)
-{
-	Koszyk* koszykKlienta;
-	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
-
-	system("cls");
-
-	cout << "Czy mozemy Ci zaufac, ze oplaciles zamowienie?" << endl
-		<< "1. Tak" << endl << "2. Jeszcze jak" << endl << "Wybierz cokolwiek" << endl;
-	system("pause");
-
-
-	//return tablicaKlientow[idKlienta].zwrocAdresZamowienia();
-}*/
 
 //SEKCJA METOD ADMINA
 
@@ -866,7 +842,6 @@ ekranStartowy:
 			if (wyborOpcji == 3)
 			{
 				Zamowienie* zamowienieKlienta;
-				//zamowienieKlienta = oplacenieKoszyka(tablicaKlientow, idKlienta);
 			}
 
 			if (wyborOpcji == 4)
