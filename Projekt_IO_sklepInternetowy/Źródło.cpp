@@ -84,6 +84,13 @@ int menuSprzedawcy()
 
 //METODY DLA MENU KLIENTA
 
+/**
+* Wyswietlanie menu logowania i tworzenia nowego konta.
+* <p>
+* Na podstawie zwracanego wyboru w main wywolywana jest odpowiednia funkcja. 
+* @return int
+*/
+
 int menuLogowania()
 {
 	int wybor = 0;
@@ -99,6 +106,15 @@ int menuLogowania()
 		return wybor;
 	}
 }
+
+/**
+* Tworzenie nowych kont i dopisywanie ich do bazy Klientow.
+* <p>
+* Zwracana wartosc jest przypisywana do idKlienta, na podstawie ktorego edytowany jest koszyk.
+* @param tablicaKlientow[]
+* @param *j
+* @return int
+*/
 
 int tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 {
@@ -131,6 +147,15 @@ int tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 	return *j;
 }
 
+/**
+* Logowanie Klienta.
+* <p>
+* Po wprowadzeniu odpowiednich danych nastepuje logowanie i zwracane jest idKlienta.
+* @param tablicaKlientow[]
+* @param i
+* @return int
+*/
+
 int logowanieKlienta(Konto tablicaKlientow[], int i)
 {
 	cout << "-------------------------------------------------------------" << endl;
@@ -144,7 +169,7 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 
 	cout << "podaj imie: ";
 	cin >> imie;
-	for (int j = 0; j <= i; j++)
+	for (j = 0; j <= i; j++)
 	{
 		if (tablicaKlientow[j].zwrocImie() == imie)
 		{
@@ -157,61 +182,51 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 	{
 		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj imie: ";
 		cin >> imie;
-		if (tablicaKlientow[j].zwrocImie() == imie)
+		for (j = 0; j <= i; j++)
 		{
-			czyDanePoprawne[0] = true;
-			break;
+			if (tablicaKlientow[j].zwrocImie() == imie)
+			{
+				czyDanePoprawne[0] = true;
+				break;
+			}
 		}
 	}
 
 	cout << "podaj nazwisko: ";
 	cin >> nazwisko;
-	//for (j = 0; j <= i; j++)
-	//{
-		if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
-		{
-			czyDanePoprawne[1] = true;
-			//break;
-		}
-	//}
+	if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
+	{
+		czyDanePoprawne[1] = true;
+	}
 
 	while (!czyDanePoprawne[1])
 	{
 		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj nazwisko: ";
 		cin >> nazwisko;
-		//for (int j = 0; j <= i; j++)
-		//{
-			if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
-			{
-				czyDanePoprawne[1] = true;
-				break;
-			}
-		//}
+		if (tablicaKlientow[j].zwrocNazwisko() == nazwisko)
+		{
+			czyDanePoprawne[1] = true;
+			break;
+		}
 	}
 
 	cout << "podaj haslo: ";
 	cin >> haslo;
-	//for (j = 0; j <= i; j++)
-	//{
-		if (tablicaKlientow[j].getPassword() == haslo)
-		{
-			czyDanePoprawne[2] = true;
-			//break;
-		}
-	//}
+
+	if (tablicaKlientow[j].getPassword() == haslo)
+	{
+		czyDanePoprawne[2] = true;
+	}
 
 	while (!czyDanePoprawne[2])
 	{
 		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj haslo: ";
 		cin >> haslo;
-		//for (j = 0; j <= i; j++)
-		//{
 			if (tablicaKlientow[j].getPassword() == haslo)
 			{
 				czyDanePoprawne[2] = true;
 				break;
 			}
-		//}
 	}
 
 	if (czyDanePoprawne[0] && czyDanePoprawne[1] & czyDanePoprawne[2])
@@ -220,6 +235,11 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 	}
 
 }
+
+/**
+* Panel klienta.
+* @return int
+*/
 
 int menuKlienta()
 {
@@ -243,6 +263,14 @@ int menuKlienta()
 	}
 }
 
+/**
+* Wypisuje na ekran konsoli liste dostepnych produktow.
+* <p>
+* Na podstawie zwroceonego wyboru w funkcji main wywolywana jest odpowiednia funkcja.
+* @param magazyn
+* @return int
+*/
+
 int wyswietlanieProduktowKlient(Magazyn magazyn)
 {
 	system("cls");
@@ -264,13 +292,22 @@ int wyswietlanieProduktowKlient(Magazyn magazyn)
 	return wybor;
 }
 
+/**
+* Dodawanie produktow do koszyka klienta.
+* <p>
+* Jesli klient poda prawidlowe idProduktu oraz iloscSztukProduktu do koszyka klienta (na podstawie adresu w pamieci) dodawany jest Item zawierajacy te informacje.
+* @param tablicaKlientow[]
+* @param idKlienta
+* @param tablicaProduktow[]
+* @return void
+*/
+
 void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzedmiotow[])
 {
 	Koszyk *koszykKlienta;
 	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
 	int idPrzedmiotu;
 	int iloscPrzedmiotow;
-	bool dodacKolejnyProdukt = false;
 
 	cout << endl << "Podaj id przedmiotu, ktory chcesz dodac: ";
 	cin >> idPrzedmiotu;
@@ -294,6 +331,15 @@ void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzed
 	if (_getch() == '1') dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaPrzedmiotow);
 	wait(1);
 }
+
+/**
+* Edycja koszyka
+* <p>
+* Funkcja wypisuje na ekran koszyk klienta, a nastepnie zwraca wybrana przez niego opcje (na podstawie ktorej wywolywana jest kolejna funkcja).
+* @param tablicaKlientow[]
+* @param idKlienta
+* @return int
+*/
 
 int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 {
@@ -319,6 +365,15 @@ int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 		return wybor;
 	}
 }
+
+/**
+* Usuwanie przedmiotow z koszyka
+* <p>
+* Funkcja wypisuje koszyk, a nastepnie na podstawie wyboru klienta usuwa produkt z koszyka edytujac tablice (usunItem).
+* @param tablicaKlientow[]
+* @param idKlienta
+* @return void
+*/
 
 void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 {
@@ -350,20 +405,6 @@ void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 	wait(1);
 }
 
-/*Zamowienie* oplacenieKoszyka(Konto tablicaKlientow[], int idKlienta)
-{
-	Koszyk* koszykKlienta;
-	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
-
-	system("cls");
-
-	cout << "Czy mozemy Ci zaufac, ze oplaciles zamowienie?" << endl
-		<< "1. Tak" << endl << "2. Jeszcze jak" << endl << "Wybierz cokolwiek" << endl;
-	system("pause");
-
-
-	//return tablicaKlientow[idKlienta].zwrocAdresZamowienia();
-}*/
 
 //SEKCJA METOD ADMINA
 
@@ -837,10 +878,12 @@ ekranStartowy:
 			}
 		}
 
+		//edycja koszyka
 		if (wyborOpcji == 2)
 		{
 			wyborOpcji = menuKoszyka(tablicaKlientow, idKlienta);
 
+			//dodawanie produktow do koszyka
 			if (wyborOpcji == 1)
 			{
 				wyborOpcji = wyswietlanieProduktowKlient(magazyn);
@@ -857,24 +900,27 @@ ekranStartowy:
 				}
 			}
 
+			//usuwanie produktow z koszyka
 			if (wyborOpcji == 2)
 			{
 				usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
 				goto klientMenu;
 			}
 
+			//utworzenie zamowienia na podstawie koszyka
 			if (wyborOpcji == 3)
 			{
 				Zamowienie* zamowienieKlienta;
-				//zamowienieKlienta = oplacenieKoszyka(tablicaKlientow, idKlienta);
 			}
 
+			//powrot do panelu klienta
 			if (wyborOpcji == 4)
 			{
 				goto klientMenu;
 			}
 		}
 
+		//powrot do ekranu startowego (wylogowanie)
 		if (wyborOpcji == 3)
 		{
 			goto ekranStartowy;
