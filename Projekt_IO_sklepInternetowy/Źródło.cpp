@@ -84,6 +84,13 @@ int menuSprzedawcy()
 
 //METODY DLA MENU KLIENTA
 
+/**
+* Wyswietlanie menu logowania i tworzenia nowego konta.
+* <p>
+* Na podstawie zwracanego wyboru w main wywolywana jest odpowiednia funkcja. 
+* @return int
+*/
+
 int menuLogowania()
 {
 	int wybor = 0;
@@ -99,6 +106,15 @@ int menuLogowania()
 		return wybor;
 	}
 }
+
+/**
+* Tworzenie nowych kont i dopisywanie ich do bazy Klientow.
+* <p>
+* Zwracana wartosc jest przypisywana do idKlienta, na podstawie ktorego edytowany jest koszyk.
+* @param tablicaKlientow[]
+* @param *j
+* @return int
+*/
 
 int tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 {
@@ -130,6 +146,15 @@ int tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 	tablicaKlientow[*j].dodajKlienta(imie, nazwisko, haslo);
 	return *j;
 }
+
+/**
+* Logowanie Klienta.
+* <p>
+* Po wprowadzeniu odpowiednich danych nastepuje logowanie i zwracane jest idKlienta.
+* @param tablicaKlientow[]
+* @param i
+* @return int
+*/
 
 int logowanieKlienta(Konto tablicaKlientow[], int i)
 {
@@ -211,6 +236,11 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 
 }
 
+/**
+* Panel klienta.
+* @return int
+*/
+
 int menuKlienta()
 {
 	system("cls");
@@ -233,6 +263,14 @@ int menuKlienta()
 	}
 }
 
+/**
+* Wypisuje na ekran konsoli liste dostepnych produktow.
+* <p>
+* Na podstawie zwroceonego wyboru w funkcji main wywolywana jest odpowiednia funkcja.
+* @param magazyn
+* @return int
+*/
+
 int wyswietlanieProduktowKlient(Magazyn magazyn)
 {
 	system("cls");
@@ -254,13 +292,22 @@ int wyswietlanieProduktowKlient(Magazyn magazyn)
 	return wybor;
 }
 
+/**
+* Dodawanie produktow do koszyka klienta.
+* <p>
+* Jesli klient poda prawidlowe idProduktu oraz iloscSztukProduktu do koszyka klienta (na podstawie adresu w pamieci) dodawany jest Item zawierajacy te informacje.
+* @param tablicaKlientow[]
+* @param idKlienta
+* @param tablicaProduktow[]
+* @return void
+*/
+
 void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzedmiotow[])
 {
 	Koszyk *koszykKlienta;
 	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
 	int idPrzedmiotu;
 	int iloscPrzedmiotow;
-	bool dodacKolejnyProdukt = false;
 
 	cout << endl << "Podaj id przedmiotu, ktory chcesz dodac: ";
 	cin >> idPrzedmiotu;
@@ -284,6 +331,15 @@ void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzed
 	if (_getch() == '1') dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaPrzedmiotow);
 	wait(1);
 }
+
+/**
+* Edycja koszyka
+* <p>
+* Funkcja wypisuje na ekran koszyk klienta, a nastepnie zwraca wybrana przez niego opcje (na podstawie ktorej wywolywana jest kolejna funkcja).
+* @param tablicaKlientow[]
+* @param idKlienta
+* @return int
+*/
 
 int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 {
@@ -309,6 +365,15 @@ int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 		return wybor;
 	}
 }
+
+/**
+* Usuwanie przedmiotow z koszyka
+* <p>
+* Funkcja wypisuje koszyk, a nastepnie na podstawie wyboru klienta usuwa produkt z koszyka edytujac tablice (usunItem).
+* @param tablicaKlientow[]
+* @param idKlienta
+* @return void
+*/
 
 void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 {
@@ -813,10 +878,12 @@ ekranStartowy:
 			}
 		}
 
+		//edycja koszyka
 		if (wyborOpcji == 2)
 		{
 			wyborOpcji = menuKoszyka(tablicaKlientow, idKlienta);
 
+			//dodawanie produktow do koszyka
 			if (wyborOpcji == 1)
 			{
 				wyborOpcji = wyswietlanieProduktowKlient(magazyn);
@@ -833,23 +900,27 @@ ekranStartowy:
 				}
 			}
 
+			//usuwanie produktow z koszyka
 			if (wyborOpcji == 2)
 			{
 				usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
 				goto klientMenu;
 			}
 
+			//utworzenie zamowienia na podstawie koszyka
 			if (wyborOpcji == 3)
 			{
 				Zamowienie* zamowienieKlienta;
 			}
 
+			//powrot do panelu klienta
 			if (wyborOpcji == 4)
 			{
 				goto klientMenu;
 			}
 		}
 
+		//powrot do ekranu startowego (wylogowanie)
 		if (wyborOpcji == 3)
 		{
 			goto ekranStartowy;
