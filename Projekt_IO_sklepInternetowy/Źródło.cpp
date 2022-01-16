@@ -910,7 +910,8 @@ ekranStartowy:
 			//utworzenie zamowienia na podstawie koszyka
 			if (wyborOpcji == 3)
 			{
-				Zamowienie* zamowienieKlienta;
+				tablicaZamowien[idZamowienia].ustawZamowienie(idZamowienia + 1, "do_realizacji", "oplacone");
+				idZamowienia++;
 			}
 
 			//powrot do panelu klienta
