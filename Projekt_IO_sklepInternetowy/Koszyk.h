@@ -10,6 +10,11 @@ private:
 	Item produkt[10];
 	Zamowienie* noweZamowienie;
 public:
+	/**
+		* Konstruktor domyslny klasy Koszyk
+		* <p>
+		* Tworzy nowy obiekt klasy Koszyk.
+		*/
 	Koszyk();
 	/**
 	* Dodaje item do tablicy produktow.
@@ -28,7 +33,7 @@ public:
 	void wypiszKoszyk();
 	/**
 	* Zwraca id produktu w koszyku.
-	* @return int.
+	* @return id typ int
 	*/
 	int zwrocId();
 	Zamowienie* zwrocAdresZamowienia();

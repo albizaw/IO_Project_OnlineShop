@@ -8,6 +8,11 @@ private:
 	int iterator = 0;
 	Produkt *produktyMagazyn[100];
 public:
+	/**
+		* Konstruktor domyslny klasy Magazyn
+		* <p>
+		* Tworzy nowy obiekt klasy Magazyn
+		*/
 	Magazyn();
 	/**
 		* Zapisuje obiekt Produkt do tablicy produktyMagazyn
