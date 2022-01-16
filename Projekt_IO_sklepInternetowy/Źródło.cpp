@@ -912,6 +912,7 @@ ekranStartowy:
 			{
 				tablicaZamowien[idZamowienia].ustawZamowienie(idZamowienia + 1, "do_realizacji", "oplacone");
 				idZamowienia++;
+				goto klientMenu;
 			}
 
 			//powrot do panelu klienta
