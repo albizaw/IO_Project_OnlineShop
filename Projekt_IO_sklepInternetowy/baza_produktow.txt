@@ -4,3 +4,6 @@ kubek
 Rukola
 31
 3
+Mikrofon
+15
+24
