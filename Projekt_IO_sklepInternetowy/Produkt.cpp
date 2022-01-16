@@ -52,7 +52,7 @@ string Produkt::zwrocNazwe()
 
 float Produkt::zwrocCene()
 {
-	return cena;
+	return cena
 }
 
 unsigned int Produkt::zwrocIlosc()

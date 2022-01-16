@@ -16,6 +16,7 @@ Zamowienie::Zamowienie(int id)
 bool Zamowienie::anulujZamowienie()
 {
 	if (oplacenieZamowienia == "nie" || statusZamowienia == "do_realizacji") return true;
+	return false;
 }
 
 void Zamowienie::realizujZamowienie()

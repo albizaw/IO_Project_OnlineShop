@@ -13,7 +13,7 @@ public:
 		*/
 	Item();
 	/**
-		* Konstruktor parametryczny klasy Ite 
+		* Konstruktor parametryczny klasy Item 
 		* <p>
 		* Przyjmuje obiekt typu Produkt oraz ilosc typu int.
 		* @param dodawanyProdukt 
