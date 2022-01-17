@@ -1,0 +1,9 @@
+zrealizowane,tak
+do_realizacji,nie
+do_realizacji,tak
+zrealizowane,tak
+zrealizowane,tak
+do_realizacji,nie
+do_realizacji,tak
+do_realizacji,tak
+do_realizacji,tak
