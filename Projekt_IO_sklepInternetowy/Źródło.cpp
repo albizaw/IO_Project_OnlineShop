@@ -12,6 +12,13 @@
 #include "Zamowienie.h"
 #include <fstream>
 
+/**
+* Funckja zatrzymujaca program.
+* <p>
+* Funckja zatrzymuje program na tyle sekund ile zostalo przekazane do niej podczas wywolania.
+* @param secons - dlugosc zatrzymania programu
+* @return void
+*/
 void wait(int seconds)
 {
 	clock_t endwait;
@@ -43,7 +50,12 @@ int ekranStarowy()
 	}
 
 }
-
+/**
+* Wyswietlanie menu wyboru sprzedawcy.
+* <p>
+* Na podstawie zwracanego wyboru wybierana jest odpowiednia funkcja realizujaca dalsze dzialania.
+* @return wybor - liczba typu int
+*/
 int menuAdministratora()
 {
 
@@ -63,6 +75,12 @@ int menuAdministratora()
 	}
 }
 
+/**
+* Wyswietlanie menu wyboru sprzedawcy.
+* <p>
+* Na podstawie zwracanego wyboru wybierana jest odpowiednia funkcja realizujaca dalsze dzialania.
+* @return wybor - liczba typu int
+*/
 int menuSprzedawcy()
 {
 	int wybor = 0;
@@ -115,7 +133,6 @@ int menuLogowania()
 * @param *j
 * @return int
 */
-
 int tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 {
 	cout << "-------------------------------------------------------------" << endl;
@@ -155,7 +172,6 @@ int tworzenieKontaKlienta(Konto tablicaKlientow[], int* j)
 * @param i
 * @return int
 */
-
 int logowanieKlienta(Konto tablicaKlientow[], int i)
 {
 	cout << "-------------------------------------------------------------" << endl;
@@ -240,7 +256,6 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 * Panel klienta.
 * @return int
 */
-
 int menuKlienta()
 {
 	system("cls");
@@ -270,7 +285,6 @@ int menuKlienta()
 * @param magazyn
 * @return int
 */
-
 int wyswietlanieProduktowKlient(Magazyn magazyn)
 {
 	system("cls");
@@ -301,7 +315,6 @@ int wyswietlanieProduktowKlient(Magazyn magazyn)
 * @param tablicaProduktow[]
 * @return void
 */
-
 void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzedmiotow[])
 {
 	Koszyk *koszykKlienta;
@@ -340,7 +353,6 @@ void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzed
 * @param idKlienta
 * @return int
 */
-
 int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 {
 	cout << "-------------------------------------------------------------" << endl;
@@ -374,7 +386,6 @@ int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 * @param idKlienta
 * @return void
 */
-
 void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 {
 	system("cls");
@@ -407,11 +418,16 @@ void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 
 
 //SEKCJA METOD ADMINA
-
+/**
+* Logowanie administratora.
+* <p>
+* Uzytkownik jest proszony o wpisanie hasla administratora. Jesli jest ono prawidlowe przenosi do glownego menu administratora
+* w przeciwnym wypadku ponownie wraca uzytkownika do ekranu startowego
+* @param adminLogowanie - obiekt klasy Konto
+* @return bool
+*/
 bool logowanieAdministatora(Konto adminLogowanie) {
-	//to co robi administrator
-		//logowanie
-	
+
 	string passAdmin = adminLogowanie.getPassword();
 	string passAdminRight = adminLogowanie.getPassword();
 	cout << "Wprowadz haslo administratora:	";
@@ -444,6 +460,14 @@ bool logowanieAdministatora(Konto adminLogowanie) {
 	}
 }
 
+/**
+* Logowanie sprzedawcy.
+* <p>
+* Uzytkownik jest proszony o wpisanie hasla sprzedawcy. Jesli jest ono prawidlowe przenosi do glownego menu sprzedawcy
+* w przeciwnym wypadku ponownie wraca uzytkownika do ekranu startowego
+* @param sprzedawcaLogowanie - obiekt klasy Konto
+* @return bool
+*/
 bool logowanieSprzedawcy(Konto sprzedawcaLogowanie)
 {
 	string passDealer = sprzedawcaLogowanie.getPassword();
