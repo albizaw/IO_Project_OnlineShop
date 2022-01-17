@@ -88,11 +88,11 @@ int menuSprzedawcy()
 	while (wybor > 3 || wybor < 1)
 	{
 
-		cout << "1. Wyœwietl zamówienia" << endl << endl;
-		cout << "2. Realizuj zamówienie" << endl << endl;
+		cout << "1. Wyswietl zamowienia" << endl << endl;
+		cout << "2. Realizuj zamowienie" << endl << endl;
 		cout << "3. Anuluj zamowienie" << endl << endl;
 		cout << "4. Wyjscie do ekranu startowego" << endl << endl;
-		cout << "Wybierz opcje 1 - 3: ";
+		cout << "Wybierz opcje 1 - 4: ";
 		cin >> wybor;
 		system("cls");
 		return wybor;
@@ -431,23 +431,28 @@ bool logowanieAdministatora(Konto adminLogowanie) {
 	string passAdmin = adminLogowanie.getPassword();
 	string passAdminRight = adminLogowanie.getPassword();
 	cout << "Wprowadz haslo administratora:	";
-	for (int i = 0; i < passAdminRight.length(); i++)
+	string password, P;
+	char p;
+	p = _getch();
+	while (p != 13)
 	{
-		passAdmin[i] = _getch();
-		
+		if (p == 8)
+		{
+			P.resize(P.length() - 1);
+			cout << P;
+			password.resize(password.length() - 1);
+		}
+		else {
+			P = P + "*";
+			cout << P;
+			password.push_back(p);
+		}
+		p = _getch();
 		system("cls");
 		cout << "Wprowadz haslo administratora:	";
-
-		for (int j = 1; j <= i + 1; j++)
-		{
-			cout << "*";
-
-		}
-		
 	}
 	
-	
-	if (passAdmin == passAdminRight)
+	if (password == passAdminRight)
 	{
 		system("cls");
 		cout << "zalogowano" << endl;
@@ -473,20 +478,27 @@ bool logowanieSprzedawcy(Konto sprzedawcaLogowanie)
 	string passDealer = sprzedawcaLogowanie.getPassword();
 	string passDealerRight = sprzedawcaLogowanie.getPassword();
 	cout << "Wprowadz haslo sprzedawcy:	";
-	for (int i = 0; i < passDealerRight.length(); i++)
+	string password, P;
+	char p;
+	p = _getch();
+	while (p != 13)
 	{
-		passDealer[i] = _getch();
+		if (p == 8)
+		{
+			P.resize(P.length() - 1);
+			cout << P;
+			password.resize(password.length() - 1);
+		}
+		else {
+			P = P + "*";
+			cout << P;
+			password.push_back(p);
+		}
+		p = _getch();
 		system("cls");
 		cout << "Wprowadz haslo sprzedawcy:	";
-
-		for (int j = 1; j <= i + 1; j++)
-		{
-			cout << "*";
-		}
-
 	}
-
-	if (passDealer == passDealerRight)
+	if (password == passDealerRight)
 	{
 		system("cls");
 		cout << "zalogowano" << endl;
