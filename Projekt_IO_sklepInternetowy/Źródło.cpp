@@ -88,11 +88,11 @@ int menuSprzedawcy()
 	while (wybor > 3 || wybor < 1)
 	{
 
-		cout << "1. Wyœwietl zamówienia" << endl << endl;
-		cout << "2. Realizuj zamówienie" << endl << endl;
+		cout << "1. Wyswietl zamowienia" << endl << endl;
+		cout << "2. Realizuj zamowienie" << endl << endl;
 		cout << "3. Anuluj zamowienie" << endl << endl;
 		cout << "4. Wyjscie do ekranu startowego" << endl << endl;
-		cout << "Wybierz opcje 1 - 3: ";
+		cout << "Wybierz opcje 1 - 4: ";
 		cin >> wybor;
 		system("cls");
 		return wybor;
