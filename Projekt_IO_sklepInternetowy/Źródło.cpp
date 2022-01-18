@@ -229,7 +229,7 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 	cout << "podaj haslo: ";
 	cin >> haslo;
 
-	if (tablicaKlientow[j].getPassword() == haslo)
+	if (tablicaKlientow[j].zwrocHaslo() == haslo)
 	{
 		czyDanePoprawne[2] = true;
 	}
@@ -238,7 +238,7 @@ int logowanieKlienta(Konto tablicaKlientow[], int i)
 	{
 		cout << "Dane niepoprawne, sprobuj ponownie" << endl << "podaj haslo: ";
 		cin >> haslo;
-			if (tablicaKlientow[j].getPassword() == haslo)
+			if (tablicaKlientow[j].zwrocHaslo() == haslo)
 			{
 				czyDanePoprawne[2] = true;
 				break;
@@ -428,8 +428,8 @@ void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
 */
 bool logowanieAdministatora(Konto adminLogowanie) {
 
-	string passAdmin = adminLogowanie.getPassword();
-	string passAdminRight = adminLogowanie.getPassword();
+	string passAdmin = adminLogowanie.zwrocHaslo();
+	string passAdminRight = adminLogowanie.zwrocHaslo();
 	cout << "Wprowadz haslo administratora:	";
 	string password, P;
 	char p;
@@ -475,8 +475,8 @@ bool logowanieAdministatora(Konto adminLogowanie) {
 */
 bool logowanieSprzedawcy(Konto sprzedawcaLogowanie)
 {
-	string passDealer = sprzedawcaLogowanie.getPassword();
-	string passDealerRight = sprzedawcaLogowanie.getPassword();
+	string passDealer = sprzedawcaLogowanie.zwrocHaslo();
+	string passDealerRight = sprzedawcaLogowanie.zwrocHaslo();
 	cout << "Wprowadz haslo sprzedawcy:	";
 	string password, P;
 	char p;

@@ -14,7 +14,7 @@ namespace Testyjednostkowe
 		{
 			Konto konto("Pawel", "Zachwieja", "12345");
 			string haslo = "12345";
-			Assert::AreEqual(haslo, konto.getPassword());
+			Assert::AreEqual(haslo, konto.zwrocHaslo());
 		}
 		TEST_METHOD(zwrocNazwisko)
 		{
