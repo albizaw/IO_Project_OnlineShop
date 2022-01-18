@@ -309,14 +309,21 @@ int wyswietlanieProduktowKlient(Magazyn magazyn)
 /**
 * Dodawanie produktow do koszyka klienta.
 * <p>
-* Jesli klient poda prawidlowe idProduktu oraz iloscSztukProduktu do koszyka klienta (na podstawie adresu w pamieci) dodawany jest Item zawierajacy te informacje.
+* Jesli klient poda prawidlowe idProduktu oraz iloscSztukProduktu do koszyka klienta (na podstawie adresu w pamieci) dodawany jest Item zawierajacy te informacje oraz zmniejszana ilosc produktow w magazynie.
 * @param tablicaKlientow[]
 * @param idKlienta
 * @param tablicaProduktow[]
 * @return void
 */
-void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzedmiotow[])
+void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzedmiotow[], Magazyn magazyn)
 {
+	system("cls");
+	cout << "-------------------------------------------------------------" << endl;
+	cout << "	Dostepne produkty:" << endl;
+	cout << "-------------------------------------------------------------" << endl << endl;
+
+	magazyn.wyswietlListeProduktow();
+
 	Koszyk *koszykKlienta;
 	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
 	int idPrzedmiotu;
@@ -339,9 +346,11 @@ void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzed
 	koszykKlienta->dodajItem(dodawanyItem);
 	koszykKlienta->wypiszKoszyk();
 
+	tablicaPrzedmiotow[idPrzedmiotu].zmienIlosc(tablicaPrzedmiotow[idPrzedmiotu].zwrocIlosc() - iloscPrzedmiotow);
+
 	cout << endl << "Czy chcesz dodac kolejny produkt?" << endl << "1. Tak"
 		<< endl << "2. Nie" << endl << endl;
-	if (_getch() == '1') dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaPrzedmiotow);
+	if (_getch() == '1') dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaPrzedmiotow, magazyn);
 	wait(1);
 }
 
@@ -386,33 +395,43 @@ int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 * @param idKlienta
 * @return void
 */
-void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta)
+void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzedmiotow[], int iloscWMagazynie)
 {
 	system("cls");
 	cout << "-------------------------------------------------------------" << endl;
 	cout << "	Usuwanie produktow z koszyka " << endl;
 	cout << "-------------------------------------------------------------" << endl << endl;
 
-	int idDoUsuniecia = 0;
+	int idDoUsuniecia = -1;
 	Koszyk* koszykKlienta;
 	koszykKlienta = tablicaKlientow[idKlienta].zwrocAdresKoszyka();
 	koszykKlienta->wypiszKoszyk();
 
 	cout << endl << "Wybierz id przedmiotu do usuniecia: ";
 	cin >> idDoUsuniecia;
-	while (idDoUsuniecia<1 || idDoUsuniecia > koszykKlienta->zwrocId())
+	idDoUsuniecia--;
+	while (idDoUsuniecia<0 || idDoUsuniecia > koszykKlienta->zwrocId())
 	{
 		cout << endl << "Podane id jest nie prawidlowe, sprobuj jeszcze raz: ";
 		cin >> idDoUsuniecia;
 	}
+	
+	int i = 0;
+	for (i = 0; i <= iloscWMagazynie; i++)
+	{
+		if (tablicaPrzedmiotow[i].zwrocNazwe() == koszykKlienta->zwrocItem(idDoUsuniecia).zwrocNazweProduktu()) break;
+	}
+	
 	koszykKlienta->usunItem(idDoUsuniecia);
+
+	tablicaPrzedmiotow[i].zmienIlosc(tablicaPrzedmiotow[i].zwrocIlosc() + koszykKlienta->zwrocItem(idDoUsuniecia).zwrocIloscSztuk());
 
 	cout << endl;
 	koszykKlienta->wypiszKoszyk();
 
 	cout << endl << "Czy chcesz usunac kolejny produkt?" << endl << "1. Tak"
 		<< endl << "2. Nie" << endl << endl;
-	if (_getch() == '1') usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
+	if (_getch() == '1') usunPrzedmiotKoszyk(tablicaKlientow, idKlienta, tablicaPrzedmiotow, iloscWMagazynie);
 	wait(1);
 }
 
@@ -903,7 +922,7 @@ ekranStartowy:
 			//dodanie przedmiotu do koszyka
 			if (wyborOpcji == 1)
 			{
-				dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
+				dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow, magazyn);
 				goto klientMenu;
 			}
 
@@ -926,7 +945,7 @@ ekranStartowy:
 
 				if (wyborOpcji == 1)
 				{
-					dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow);
+					dodajDoKoszyka(tablicaKlientow, idKlienta, tablicaProduktow, magazyn);
 					goto klientMenu;
 				}
 
@@ -939,7 +958,7 @@ ekranStartowy:
 			//usuwanie produktow z koszyka
 			if (wyborOpcji == 2)
 			{
-				usunPrzedmiotKoszyk(tablicaKlientow, idKlienta);
+				usunPrzedmiotKoszyk(tablicaKlientow, idKlienta, tablicaProduktow,i);
 				goto klientMenu;
 			}
 

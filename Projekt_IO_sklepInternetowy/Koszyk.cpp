@@ -24,13 +24,17 @@ void Koszyk::usunItem(int idPrzedmiotuDoUsuniecia)
 	int i = 0;
 	int j = 0;
 	
+	cout << idPrzedmiotuDoUsuniecia << endl;
 	while (i < id && j < id)
 	{
-		if (i = idPrzedmiotuDoUsuniecia) i++;
-		tmp[j] = produkt[i];
-
-		j++;
-		i++;
+		if (i == idPrzedmiotuDoUsuniecia) i++;
+		else
+		{
+			tmp[j] = produkt[i];
+			j++;
+			i++;
+		}
+		
 	}
 	id--;
 
@@ -50,4 +54,9 @@ void Koszyk::wypiszKoszyk()
 		cout << i+1 << ". " << produkt[i].zwrocNazweProduktu() << " "
 			<< produkt[i].zwrocIloscSztuk() << endl;
 	}
+}
+
+Item Koszyk::zwrocItem(int idItemu)
+{
+	return produkt[idItemu];
 }
