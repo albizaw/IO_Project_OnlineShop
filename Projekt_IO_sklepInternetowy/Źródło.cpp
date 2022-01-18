@@ -307,6 +307,42 @@ int wyswietlanieProduktowKlient(Magazyn magazyn)
 }
 
 /**
+* Aktualizuje stan magazynu (plik baza_produktow.txt)
+* <p>
+* Aktualizacja stanu magazynu nastepuje podczas dodania oraz usuniecia przemdiotu z koszyka.
+* @param tablicaProduktow[]
+*/
+void aktualizacjaStanuMagazynu(Produkt tablicaProduktow[])
+{
+	//czyszczenie pliku baza_produktow.txt
+	std::ofstream ofs;
+	ofs.open("baza_produktow.txt", std::ofstream::out | std::ofstream::trunc);
+	ofs.close();
+
+	//wpisanie nowej tablicy do pliku
+	ofstream zapis("baza_produktow.txt");
+	for (int i = 0; i < 100; i++)
+	{
+		if (tablicaProduktow[i].zwrocNazwe() != "")
+		{
+			if (i == 0)
+			{
+				zapis << tablicaProduktow[i].zwrocNazwe() << endl;
+				zapis << tablicaProduktow[i].zwrocCene() << endl;
+				zapis << tablicaProduktow[i].zwrocIlosc();
+			}
+			else
+			{
+				zapis << endl << tablicaProduktow[i].zwrocNazwe() << endl;
+				zapis << tablicaProduktow[i].zwrocCene() << endl;
+				zapis << tablicaProduktow[i].zwrocIlosc();
+			}
+		}
+	}
+	zapis.close();
+}
+
+/**
 * Dodawanie produktow do koszyka klienta.
 * <p>
 * Jesli klient poda prawidlowe idProduktu oraz iloscSztukProduktu do koszyka klienta (na podstawie adresu w pamieci) dodawany jest Item zawierajacy te informacje oraz zmniejszana ilosc produktow w magazynie.
@@ -347,6 +383,8 @@ void dodajDoKoszyka(Konto tablicaKlientow[], int idKlienta, Produkt tablicaPrzed
 	koszykKlienta->wypiszKoszyk();
 
 	tablicaPrzedmiotow[idPrzedmiotu].zmienIlosc(tablicaPrzedmiotow[idPrzedmiotu].zwrocIlosc() - iloscPrzedmiotow);
+
+	aktualizacjaStanuMagazynu(tablicaPrzedmiotow);
 
 	cout << endl << "Czy chcesz dodac kolejny produkt?" << endl << "1. Tak"
 		<< endl << "2. Nie" << endl << endl;
@@ -390,7 +428,7 @@ int menuKoszyka(Konto tablicaKlientow[], int idKlienta)
 /**
 * Usuwanie przedmiotow z koszyka
 * <p>
-* Funkcja wypisuje koszyk, a nastepnie na podstawie wyboru klienta usuwa produkt z koszyka edytujac tablice (usunItem).
+* Funkcja wypisuje koszyk, a nastepnie na podstawie wyboru klienta usuwa produkt z koszyka edytujac tablice (usunItem) oraz zwieksza jego ilosc w magazynie.
 * @param tablicaKlientow[]
 * @param idKlienta
 * @return void
@@ -426,6 +464,8 @@ void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta, Produkt tablica
 
 	tablicaPrzedmiotow[i].zmienIlosc(tablicaPrzedmiotow[i].zwrocIlosc() + koszykKlienta->zwrocItem(idDoUsuniecia).zwrocIloscSztuk());
 
+	aktualizacjaStanuMagazynu(tablicaPrzedmiotow);
+
 	cout << endl;
 	koszykKlienta->wypiszKoszyk();
 
@@ -434,7 +474,6 @@ void usunPrzedmiotKoszyk(Konto tablicaKlientow[], int idKlienta, Produkt tablica
 	if (_getch() == '1') usunPrzedmiotKoszyk(tablicaKlientow, idKlienta, tablicaPrzedmiotow, iloscWMagazynie);
 	wait(1);
 }
-
 
 //SEKCJA METOD ADMINA
 /**
@@ -705,7 +744,6 @@ ekranStartowy:
 				}
 			}
 			zapis.close();
-			odczyt.close();
 			goto adminMenu;
 
 		}
