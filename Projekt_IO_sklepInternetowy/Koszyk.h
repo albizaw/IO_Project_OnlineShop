@@ -37,4 +37,5 @@ public:
 	*/
 	int zwrocId();
 	Zamowienie* zwrocAdresZamowienia();
+	Item zwrocItem(int idItemu);
 };

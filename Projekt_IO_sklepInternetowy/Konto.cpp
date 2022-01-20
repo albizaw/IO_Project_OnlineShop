@@ -3,7 +3,7 @@
 
 using namespace std;
 
-string Konto::getPassword()
+string Konto::zwrocHaslo()
 {
 	return Konto::haslo;
 }
@@ -21,7 +21,7 @@ string Konto::zwrocNazwisko()
 void Konto::wypisz()
 {
 	cout << "imie = " << zwrocImie() << endl << "nazwisko = " << zwrocNazwisko()
-		<< endl << "haslo = " << getPassword() << endl;
+		<< endl << "haslo = " << zwrocHaslo() << endl;
 }
 
 Koszyk* Konto::zwrocAdresKoszyka()

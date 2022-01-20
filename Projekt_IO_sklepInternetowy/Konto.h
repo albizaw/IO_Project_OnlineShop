@@ -16,7 +16,7 @@ public:
 	* Zwraca haslo utworzonego uzytkownika.
 	* @return haslo - typ string
 	*/
-	string getPassword();
+	string zwrocHaslo();
 	/**
 			* Konstruktor domyslny klasy Konto
 			* <p>
