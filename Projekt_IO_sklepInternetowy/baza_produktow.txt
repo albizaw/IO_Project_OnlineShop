@@ -1,9 +1,9 @@
-kubek
-3
-3
-Rukola
-31
-3
-Mikrofon
-15
+Router
+1000
+10
+Switch
+500
 24
+Modem
+100
+100

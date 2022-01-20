@@ -1000,11 +1000,20 @@ ekranStartowy:
 				goto klientMenu;
 			}
 
-			//utworzenie zamowienia na podstawie koszyka
+			//utworzenie oplaconego zamowienia na podstawie koszyka oraz aktualizacja bazy txt
 			if (wyborOpcji == 3)
 			{
-				tablicaZamowien[idZamowienia].ustawZamowienie(idZamowienia + 1, "do_realizacji", "oplacone");
+				tablicaZamowien[idZamowienia].ustawZamowienie(idZamowienia + 1, "do_realizacji", "tak");
 				idZamowienia++;
+				std::ofstream ofs;
+				ofs.open("baza_zamowien.txt", std::ofstream::out | std::ofstream::trunc);
+				ofs.close();
+				ofstream zapisZamowien("baza_zamowien.txt");
+				for (int i = 0; i < idZamowienia; i++)
+				{
+					zapisZamowien << tablicaZamowien[i].zwrocStatus() << "," << tablicaZamowien[i].zwrocOplacenie() << endl;
+				}
+				zapisZamowien.close();
 				goto klientMenu;
 			}
 
